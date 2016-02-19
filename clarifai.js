@@ -1,5 +1,10 @@
 // Cloned from https://github.com/cassidoo/clarifai-javascript-starter
 
+var jsdom = require('jsdom'), window = jsdom.jsdom().defaultView;
+jsdom.jQueryify(window, "../js/vendor/jquery.min.js", function(){
+    var $ = window.$;
+})
+
 function getCredentials(cb) {
   var data = {
     'grant_type': 'client_credentials',

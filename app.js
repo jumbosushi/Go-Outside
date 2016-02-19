@@ -2,8 +2,7 @@ var http = require('http');
 var hellobot = require('./hellobot');
 var express = require('express');
 var bodyParser = require('body-parser');
-var jsdom = require('jsdom'),
-    window = jsdom.jsdom().defaultView;
+var jsdom = require('jsdom'), window = jsdom.jsdom().defaultView;
 jsdom.jQueryify(window, "../js/vendor/jquery.min.js", function(){
     var $ = window.$;
 })
@@ -21,6 +20,10 @@ var access_token;
 // key = user's subscription id | val = access_token
 var users = {};
 var user_name;
+var user_id;
+
+// for Instagram API
+var redirect_uri = "https://lit-journey-12058.herokuapp.com/handleauth";
 
 // body parser middleware
 app.use(bodyParser.urlencoded({ extended: true}));
@@ -37,11 +40,10 @@ ig.use({
 
 // Slash command login
 app.post('/slash', function (req, res) {
-    console.log("DOES THIS PLACE HAVE USER ID???")
-    console.log(req.body);
     var slash_text = req.body.text;
     if (slash_text == "login") {
         user_name = req.body.user_name; // store the username temporally
+        user_id = req.body.user_id; // store the user_id temporally
         slack.send({
             text: "<https://lit-journey-12058.herokuapp.com/authorize_user|Sign in from here!>"
         });
@@ -59,7 +61,6 @@ app.post('/slash', function (req, res) {
     }
 });
 
-var redirect_uri = "https://lit-journey-12058.herokuapp.com/handleauth";
 
 // Authorize the user by redirecting user to sign in page
 exports.authorize_user = function(req, res) {
@@ -87,7 +88,7 @@ exports.handleauth = function(req, res) {
       // initializes the user profile
       ig.add_user_subscription('https://lit-journey-12058.herokuapp.com/user',
                                function(err, result, remaining, limit){
-                                    users[result.id] = {"access": access_token,
+                                    users[result.id] = {"access": user_id,
                                                         "name": user_name,
                                                         "score": 0};
                                     console.log(users);
@@ -104,7 +105,7 @@ app.get('/handleauth', exports.handleauth);
 
 
 // ---------------------------------
-// Instagram subscrription
+// Instagram subscrription API
 
 // Subscribe the user when the user loggs in
 app.get('/user', function(req, res) {
@@ -123,18 +124,18 @@ app.post('/user', function(req, res) {
         slack.send({
             text: users[sub_id]["name"] + " submitted a new picture"
         });
+        var recent = ig.user_media_recent('user_id',
+                                           function(err,
+                                                     medias,
+                                                     pagination,
+                                                     remaining,
+                                                     limit) {});
+        console.log(recent);
     }
-    //console.log("MEDIA ID");
-    //console.log(req.body[0]['data']['media_id']);
     res.send("New activity from the subcription detected");
 } );
 
-// ----------------------------------
-
-// Instagram recent API
-// get the most url of the most recent picture
-
-// ----------------------------------
+// -------------------------------------
 
 // test route
 app.get('/', function (req, res) { res.status(200).send('Hello World!') });
