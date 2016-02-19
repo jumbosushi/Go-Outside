@@ -90,18 +90,20 @@ exports.handleauth = function(req, res) {
       });
     }
   });
-  res.end('It worked!')
-};
-
-// Instagram subscription
-// initializes the user profile
-ig.add_user_subscription('https://lit-journey-12058.herokuapp.com/user',
+  // Instagram subscription
+  // initializes the user profile
+  ig.add_user_subscription('https://lit-journey-12058.herokuapp.com/user',
                                function(err, result, remaining, limit){
                                     users[result.id] = {"access": access_token,
                                                         "name": user_name,
                                                         "score": 0};
                                     console.log(users);
                                });
+  res.end('It worked!')
+};
+
+
+
 
 // This is where api initially send users to authorize
 app.get('/authorize_user', exports.authorize_user);
