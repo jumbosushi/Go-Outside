@@ -38,13 +38,16 @@ app.post('/slash', function (req, res) {
     }
 });
 
+// Below links kept here for testing purposes
 //https://lit-journey-12058.herokuapp.com/handleauth
 //http://localhost:3000/handleauth
 var redirect_uri = "https://lit-journey-12058.herokuapp.com/handleauth";
 
 // Authorize the user by redirecting user to sign in page
 exports.authorize_user = function(req, res) {
-  res.redirect(ig.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
+  res.redirect(ig.get_authorization_url(redirect_uri,
+                                        { scope: ['likes'],
+                                          state: 'a state' }));
 };
 
 // Send message on #general that the user is signed in
@@ -61,19 +64,36 @@ exports.handleauth = function(req, res) {
       slack.send({
             text: "Log in Successful!\n Welcome to Go Outside Challenge!"
       });
+      // Instagram subscription
+      ig.add_user_subscription('https://lit-journey-12058.herokuapp.com/user',
+                               function(err, result, remaining, limit){});
     }
   });
 };
 
 
-// This is where you would initially send users to authorize
+// This is where pi initially send users to authorize
 app.get('/authorize_user', exports.authorize_user);
 // This is redirect URI
 app.get('/handleauth', exports.handleauth);
 
 // ---------------------------------
 
+// Instagram subscrription API endpoints
 
+app.get('/user', function(req, res) {
+    slack.send({
+            text: "I subscribed to the feed!"
+    });
+});
+
+app.post('/user', function(req, res) {
+    slack.send({
+            text: "There's a new picture!"
+    });
+} );
+
+// ----------------------------------
 
 // test route
 app.get('/', function (req, res) { res.status(200).send('Hello World!') });
