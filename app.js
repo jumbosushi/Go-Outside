@@ -70,7 +70,7 @@ app.post('/slash', function (req, res) {
 
 // Authorize the user by redirecting user to sign in page
 exports.authorize_user = function(req, res) {
-    res.send(ig.get_authorization_url(redirect_uri))
+    res.redirect(ig.get_authorization_url(redirect_uri))
 };
 
 // Send message on #general that the user is signed in
