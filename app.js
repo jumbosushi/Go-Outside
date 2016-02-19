@@ -2,7 +2,7 @@ var http = require('http');
 var hellobot = require('./hellobot');
 var express = require('express');
 var bodyParser = require('body-parser');
-var jsdom = require('jsdom'), window = jsdom.jsdom().defaultView;
+var $ = require('jQuery');
 var ig = require('instagram-node').instagram({});
 var Slack = require('node-slack');
 var slack = new Slack("https://hooks.slack.com/services/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");
@@ -124,10 +124,7 @@ app.post('/user', function(req, res) {
             text: users[sub_id]["name"] + " submitted a new picture"
         });
         console.log(users[sub_id]["access"]);
-        jsdom.jQueryify(window, "../js/vendor/jquery.min.js", function(){
-            var $ = window.$;
-            getImgUrl(users[sub_id]["access"]);
-            done();
+        getImgUrl(users[sub_id]["access"]);
         });
     }
     res.send("New activity from the subcription detected");
