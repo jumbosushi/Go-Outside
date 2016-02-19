@@ -27,7 +27,7 @@ ig.use({
 app.post('/slash', function (req, res) {
     if (req.query.text == "login") {
         slack.send({
-            text: "<https://lit-journey-12058.herokuapp.com//authorize_user|Sign in from here!>"
+            text: "<https://lit-journey-12058.herokuapp.com/authorize_user|Sign in from here!>"
         });
         res.send("Login slash tag detected")
     } else {
