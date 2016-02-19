@@ -20,6 +20,8 @@ var access_token;
 var users = {};
 var user_name;
 var user_id;
+
+// Joey's random words
 var shit_hikers_say = {
     // found on http://iandolij.tumblr.com/post/50120585724/shit-hikers-say
     0: "Hike your own hike, man",
@@ -82,7 +84,7 @@ app.post('/slash', function (req, res) {
         user_id = req.body.user_id; // store the user_id temporally
         slack.send({
             text: "<https://lit-journey-12058.herokuapp.com/authorize_user|Join the party!>" +
-                  "\n You'll need your insagra account."//TODO
+                  "\n You'll need your insagram account."//TODO
         });
 
     // "stats" - show the current standing of people in the game
@@ -94,13 +96,13 @@ app.post('/slash', function (req, res) {
         };
 
     // else return something else
-    } else if (slash_text == "")  {
+    } else if (slash_text == null)  {
         slack.send({
                 text: shit_hikers_say[(Math.random() * 30 )]
         });
     } else {
         slack.send({
-            text: "Can't recognize the tag. Try something else plz."
+            text: "Hmm not sure what tag that is. You mean Bacon?"
         });
     }
     res.end();
@@ -125,7 +127,7 @@ exports.handleauth = function(req, res) {
       console.log('Yay! Access token is ' + result.access_token);
       access_token = result.access_token;
       slack.send({
-            text: "Log in Successful!\n Welcome to Go Outside Challenge dawg!"
+            text: "Log in Successful!\n Welcome to Go Outside homie!"
       });
     }
   });
@@ -156,7 +158,7 @@ app.get('/handleauth', exports.handleauth);
 // Subscribe the user when the user loggs in
 app.get('/user', function(req, res) {
     slack.send({
-            text: "You're part of the club! \n The first rule of Go Outside Club is to always talk about Go Outside Club"
+            text: "You're part of the club! \n Remember, the first rule of Go Outside Club is to always talk about Go Outside Club"
     });
     // Instagram API completes subscription when 'hub.challenge' is send back
     res.send(req.query['hub.challenge']);
