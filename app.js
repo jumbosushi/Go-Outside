@@ -105,9 +105,9 @@ app.post('/slash', function (req, res) {
         };
 
     // Joey also talks with no tag as well
-    } else if (slash_text == undefined)  {
+    } else if (slash_text == "")  {
         slack.send({
-                text: shit_hikers_say.(Math.random() * 30 )
+                text: shit_hikers_say[parent(Math.random() * 30 )]
         });
 
        // else return something else
