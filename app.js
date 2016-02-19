@@ -10,6 +10,9 @@ var slack = new Slack("https://hooks.slack.com/services/T0N3CEYE5/B0N49BWJ1/XUsV
 var app = express();
 var port = process.env.PORT || 3000;
 
+// Access Token
+var access_token;
+
 // body parser middleware
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
@@ -61,11 +64,11 @@ exports.handleauth = function(req, res) {
       });
     } else {
       console.log('Yay! Access token is ' + result.access_token);
+      access_token = result.access_token;
       slack.send({
             text: "Log in Successful!\n Welcome to Go Outside Challenge!"
       });
       // Instagram subscription
-      ig.subscriptions(function(err, result, remaining, limit){});
       ig.add_user_subscription('https://lit-journey-12058.herokuapp.com/user',
                                function(err, result, remaining, limit){});
     }
@@ -82,6 +85,7 @@ app.get('/handleauth', exports.handleauth);
 
 // Instagram subscrription API endpoints
 
+// Subscribe the user when the user loggs in
 app.get('/user', function(req, res) {
     console.log(req.query);
     slack.send({
@@ -90,12 +94,20 @@ app.get('/user', function(req, res) {
     res.send(req.query['hub.challenge']);
 });
 
+// Fired when any of the user uploads a new file.
+// Check if the file uploaded counts as a point.
 app.post('/user', function(req, res) {
+    console.log(req.query);
     slack.send({
-            text: "There's a new picture!"
+            text: req.query
     });
     res.send("New activity from the subcription detected");
 } );
+
+// ----------------------------------
+
+// Instagram recent API
+// get the most url of the most recent picture
 
 // ----------------------------------
 
