@@ -85,6 +85,9 @@ app.get('/user', function(req, res) {
     slack.send({
             text: "I subscribed to the feed!"
     });
+    ig.subscriptions(function(err, subscriptions, remaining, limit){
+    console.log(subscriptions);
+});
 });
 
 app.post('/user', function(req, res) {
