@@ -181,10 +181,11 @@ app.post('/user', function(req, res) {
     var sub_id = req.body[0]['subscription_id'];
     if (users[sub_id]) {
         slack.send({
-            text: users[sub_id]["name"] + " submitted a new picture"
+            text: "Looks like " + users[sub_id]["name"] + " submitted a new picture"
         });
         console.log(users[sub_id]["access"]);
-        getImgUrl(users[sub_id]["access"]);
+        var temp_result = getImgUrl(users[sub_id]["access"]);
+        check_outdoor(temp_result, users[sub_id]["name"], users[sub_id]);
     };
     res.send("New activity from the subcription detected");
     }
@@ -200,7 +201,23 @@ function getImgUrl(access) {
              console.log(img_url);
              var result = clarifai.run(img_url);
             console.log(result);
+            return XPathResult;
     });
+};
+
+// check if the picture containts
+function check_outdoor(result, name, user) {
+    result = result.split(", ");
+    for (tag in result) {
+        if (tag == "outside" || tag = "street") {
+            slack.send({
+            text: name + " did it! Way to go for being outside! (wait wut?)"
+                  + "You get 1 points."
+            });
+            user["score"] += 1;
+            return;
+        };
+    };
 };
 
 // -------------------------------------
