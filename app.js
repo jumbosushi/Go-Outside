@@ -16,6 +16,7 @@ var access_token;
 // will contain user information
 // key = user's subscription id | val = access_token
 var users = {};
+var user_name;
 
 // body parser middleware
 app.use(bodyParser.urlencoded({ extended: true}));
@@ -33,11 +34,11 @@ ig.use({
 // Slash command login
 app.post('/slash', function (req, res) {
     console.log(req.body);
+    user_name = req.body.user_name;
     if (req.body.text == "login") {
         slack.send({
             text: "<https://lit-journey-12058.herokuapp.com/authorize_user|Sign in from here!>"
         });
-        res.send("Login slash tag detected")
     } else {
         slack.send({
             text: "Can't recognize the tag. Try something else plz."
@@ -73,8 +74,8 @@ exports.handleauth = function(req, res) {
       // Instagram subscription
       ig.add_user_subscription('https://lit-journey-12058.herokuapp.com/user',
                                function(err, result, remaining, limit){
-                                    console.log(result);
-                                    users[result.id] = access_token;
+                                    users[result.id] = {"access": access_token,
+                                                        "name": user_name};
                                     console.log(users);
                                });
     }
@@ -108,7 +109,7 @@ app.post('/user', function(req, res) {
     console.log(req.body[0]['subscription_id']);
     var sub_id = req.body[0]['subscription_id'];
     if (users[sub_id]) {
-        console.log("Subid is confirmed !!!");
+        console.log(users[sub_id][name] + " submitted a new picture");
     }
     //console.log("MEDIA ID");
     //console.log(req.body[0]['data']['media_id']);
