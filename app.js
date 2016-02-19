@@ -61,14 +61,12 @@ exports.handleauth = function(req, res) {
       });
     } else {
       console.log('Yay! Access token is ' + result.access_token);
-      var options = {verify_token: result.access_token};
       slack.send({
             text: "Log in Successful!\n Welcome to Go Outside Challenge!"
       });
       // Instagram subscription
       ig.subscriptions(function(err, result, remaining, limit){});
       ig.add_user_subscription('https://lit-journey-12058.herokuapp.com/user',
-                               ,
                                function(err, result, remaining, limit){});
     }
   });
@@ -91,8 +89,8 @@ app.get('/user', function(req, res) {
     res.send(req.query.hub.challenge);
     ig.subscriptions(function(err, subscriptions, remaining, limit){
         console.log(subscriptions);
-        res.send("Subscription Added");
     });
+    res.send("Subscription Added");
 });
 
 app.post('/user', function(req, res) {
