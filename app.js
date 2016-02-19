@@ -102,6 +102,7 @@ app.post('/user', function(req, res) {
     console.log(req.body);
     console.log("SUBSCRIPTION ID");
     console.log(req.body[0]['subscription_id'];
+    console.log("SUBSCRIPTION ID ROUND 2");
     console.log(req.body['subscription_id'];
     console.log("MEDIA ID");
     console.log(req.body['data']['media_id'];
