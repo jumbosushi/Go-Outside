@@ -87,13 +87,15 @@ app.get('/user', function(req, res) {
     });
     ig.subscriptions(function(err, subscriptions, remaining, limit){
     console.log(subscriptions);
-});
+    });
+    res.send("Subscription Added");
 });
 
 app.post('/user', function(req, res) {
     slack.send({
             text: "There's a new picture!"
     });
+    res.send("New activity from the subcription detected");
 } );
 
 // ----------------------------------
