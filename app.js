@@ -97,9 +97,9 @@ app.get('/user', function(req, res) {
 // Fired when any of the user uploads a new file.
 // Check if the file uploaded counts as a point.
 app.post('/user', function(req, res) {
-    console.log(req.query);
+    console.log(req.body);
     slack.send({
-            text: req.query
+            text: req.body;
     });
     res.send("New activity from the subcription detected");
 } );
