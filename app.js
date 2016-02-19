@@ -10,8 +10,12 @@ var slack = new Slack("https://hooks.slack.com/services/T0N3CEYE5/B0N49BWJ1/XUsV
 var app = express();
 var port = process.env.PORT || 3000;
 
-// Access Token
+// hold access Token
 var access_token;
+
+// will contain user information
+// key = user's subscription id | val = access_token
+var users = {};
 
 // body parser middleware
 app.use(bodyParser.urlencoded({ extended: true}));
@@ -29,7 +33,7 @@ ig.use({
 // Slash command login
 app.post('/slash', function (req, res) {
     console.log(req.body);
-    if (req.query.text == "login") {
+    if (req.body.text == "login") {
         slack.send({
             text: "<https://lit-journey-12058.herokuapp.com/authorize_user|Sign in from here!>"
         });
@@ -70,6 +74,7 @@ exports.handleauth = function(req, res) {
       ig.add_user_subscription('https://lit-journey-12058.herokuapp.com/user',
                                function(err, result, remaining, limit){
                                     console.log(result);
+                                    users[result.id] = access_token;
                                });
     }
   });
@@ -100,8 +105,12 @@ app.post('/user', function(req, res) {
     console.log(req.body);
     console.log("SUBSCRIPTION ID");
     console.log(req.body[0]['subscription_id']);
-    console.log("MEDIA ID");
-    console.log(req.body[0]['data']['media_id']);
+    var sub_id = req.body[0]['subscription_id'];
+    if (users.sub_id) {
+        console.log("Subid is confirmed !!!");
+    }
+    //console.log("MEDIA ID");
+    //console.log(req.body[0]['data']['media_id']);
     slack.send({
             text: "A new picture eh"
     });
