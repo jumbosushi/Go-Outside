@@ -6,7 +6,7 @@ module.exports = function (req, res, next) {
 
     // avoid infitie loop
     if (userName !== 'slackbot') {
-        return res.status(200).json(botPayload);
+        return res.status(200).json(botPayLoad);
     } else {
         return res.status(200).end();
     }
