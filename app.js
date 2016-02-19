@@ -127,6 +127,7 @@ app.post('/user', function(req, res) {
         jsdom.jQueryify(window, "../js/vendor/jquery.min.js", function(){
             var $ = window.$;
             getImgUrl(users[sub_id]["access"]);
+            done();
         });
     }
     res.send("New activity from the subcription detected");
