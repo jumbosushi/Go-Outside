@@ -137,6 +137,7 @@ function getImgUrl(access) {
     $.get('https://api.instagram.com/v1/users/self/media/recent/' + '?' + url_param,
          function(result) {
              var temp_url = result.data[0].images.standard_resolution.url;
+             console.log(temp_url);
              var img_url = temp_url.split("?")[0];
              console.log(img_url);
          });
