@@ -63,5 +63,5 @@ function run(imgurl) {
 }
 
 module.exports = {
-    run: run();
+    run: run()
 }
