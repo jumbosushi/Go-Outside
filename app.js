@@ -23,7 +23,9 @@ var user_name;
 var user_id;
 
 // for Instagram API
-var redirect_uri = "https://lit-journey-12058.herokuapp.com/handleauth";
+var redirect_uri = "https://lit-journey-12058.herokuapp.com/handleauth"; //TODO
+// http://localhost:3000/
+// https://lit-journey-12058.herokuapp.com/handleauth
 
 // body parser middleware
 app.use(bodyParser.urlencoded({ extended: true}));
@@ -45,7 +47,7 @@ app.post('/slash', function (req, res) {
         user_name = req.body.user_name; // store the username temporally
         user_id = req.body.user_id; // store the user_id temporally
         slack.send({
-            text: "<https://lit-journey-12058.herokuapp.com/authorize_user|Sign in from here!>"
+            text: "<https://lit-journey-12058.herokuapp.com/authorize_user|Sign in from here!>" //TODO
         });
     } else if (slash_text == "stats") {
         for (id in users) {
@@ -86,7 +88,7 @@ exports.handleauth = function(req, res) {
       });
       // Instagram subscription
       // initializes the user profile
-      ig.add_user_subscription('https://lit-journey-12058.herokuapp.com/user',
+      ig.add_user_subscription('https://lit-journey-12058.herokuapp.com/user', //TODO
                                function(err, result, remaining, limit){
                                     users[result.id] = {"access": user_id,
                                                         "name": user_name,
@@ -124,7 +126,7 @@ app.post('/user', function(req, res) {
         slack.send({
             text: users[sub_id]["name"] + " submitted a new picture"
         });
-        var recent = ig.user_media_recent('user_id',
+        var recent = ig.user_media_recent(users[sub_id]["access"],
                                            function(err,
                                                      medias,
                                                      pagination,
