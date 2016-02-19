@@ -74,7 +74,7 @@ exports.authorize_user = function(req, res) {
             url: ig.get_authorization_url(redirect_uri),
             method: 'POST',
             dataType: 'text',
-            success: (data) {
+            complete: function(data) {
                 console.log(data);
             }
      });
