@@ -7,7 +7,7 @@ function getCredentials(cb) {
   var data = {
     'grant_type': 'client_credentials',
     'client_id': "LPOXuuwXLHA2yZ7fBrN_DAHTsu26s2mR9h4DVmMa",
-    'client_secret': VMEOyjHqQqIRRdpNL-o8wmfEpnsObF9ksIaPJ2Yt"
+    'client_secret': "VMEOyjHqQqIRRdpNL-o8wmfEpnsObF9ksIaPJ2Yt"
   };
 
   return $.ajax({
