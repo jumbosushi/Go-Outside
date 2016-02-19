@@ -35,8 +35,7 @@ exports.handleauth = function(req, res) {
       console.log('Yay! Access token is ' + result.access_token);
       var reply = slack.respond(req.body,function(hook) {
           return {
-            text: hook.user_name + " is now signed in for Go Outside challenge!",
-            username: 'Joey'
+              "text": "This is a line of text in a channel. \nAnd this is another line of text."
           };
       });
       res.json(reply);
