@@ -5,7 +5,7 @@ var bodyParser = require('body-parser');
 //var $ = require('jQuery');
 var ig = require('instagram-node').instagram();
 var Slack = require('node-slack');
-var slack = new Slack(hook_url,options);
+var slack = new Slack("https://hooks.slack.com/services/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");
 
 var app = express();
 var port = process.env.PORT || 3000;
@@ -20,10 +20,12 @@ ig.use({
 
 var redirect_uri = "https://lit-journey-12058.herokuapp.com/handleauth";
 
+// Authorize the user by redirecting user to sign in page
 exports.authorize_user = function(req, res) {
   res.redirect(ig.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
 };
 
+// Send message on general that the user is signed in
 exports.handleauth = function(req, res) {
   ig.authorize_user(req.query.code, redirect_uri, function(err, result) {
     if (err) {
@@ -31,7 +33,13 @@ exports.handleauth = function(req, res) {
       res.send("Didn't work");
     } else {
       console.log('Yay! Access token is ' + result.access_token);
-      res.send('You made it!!');
+      var reply = slack.respond(req.body,function(hook) {
+          return {
+            text: hook.user_name + " is now signed in for Go Outside challenge!",
+            username: 'Joey'
+          };
+      });
+      res.json(reply);
     }
   });
 };
