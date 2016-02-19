@@ -1,5 +1,7 @@
 // Cloned from https://github.com/cassidoo/clarifai-javascript-starter
 var $ = require('jQuery');
+var LocalStorage = require('node-localstorage').LocalStorage,
+localStorage = new LocalStorage('./scratch');
 
 function getCredentials(cb) {
   var data = {
