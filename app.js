@@ -132,9 +132,6 @@ app.post('/user', function(req, res) {
     }
 );
 
-// Call clarifai API
-app.post('/tags', clarifai.run(img_url));
-
 function getImgUrl(access) {
     var url_param = $.param({access_token: access})
     $.get('https://api.instagram.com/v1/users/self/media/recent/' + '?' + url_param,
