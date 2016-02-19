@@ -95,11 +95,21 @@ app.post('/slash', function (req, res) {
             });
         };
 
-    // else return something else
-    } else if (slash_text == undefined)  {
+    // coconut oil
+    } else if (slash_text == "coconut oil") {
+        for (id in users) {
+            slack.send({
+                text: "Now you're speaking my language"
+            });
+        };
+
+    // Joey also talks with no tag as well
+    } else if (slash_text == " ")  {
         slack.send({
                 text: shit_hikers_say[(Math.random() * 30 )]
         });
+
+       // else return something else
     } else {
         slack.send({
             text: "Hmm not sure what tag that is. You mean Bacon?"
