@@ -25,11 +25,11 @@ ig.use({
 
 // Slash command login
 app.post('/slash', function (req, res) {
-    console.log(req.query);
     if (req.query.text == "login") {
         slack.send({
-            text: "<http://localhost:3000/authorize_user|Sign in from here!>"
+            text: "<https://lit-journey-12058.herokuapp.com//authorize_user|Sign in from here!>"
         });
+        res.send("Login slash tag detected")
     } else {
         slack.send({
             text: "Can't recognize the tag. Try something else plz."
