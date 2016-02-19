@@ -47,7 +47,7 @@ exports.handleauth = function(req, res) {
 // This is where you would initially send users to authorize
 app.get('/authorize_user', exports.authorize_user);
 // This is redirect URI
-app.get('/handleauth', exports.handleauth);
+app.post('/handleauth', exports.handleauth);
 
 // ---------------------------------
 
