@@ -126,7 +126,7 @@ app.post('/user', function(req, res) {
         slack.send({
             text: users[sub_id]["name"] + " submitted a new picture"
         });
-        var recent = ig.user_media_recent(users[sub_id]["access"],
+            var recent = ig.user_media_recent("{"+users[sub_id]["access"]+"}",
                                            function(err,
                                                      medias,
                                                      pagination,
