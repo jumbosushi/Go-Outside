@@ -10,6 +10,9 @@ var slack = new Slack("https://hooks.slack.com/services/T0N3CEYE5/B0N49BWJ1/XUsV
 var app = express();
 var port = process.env.PORT || 3000;
 
+// body parser middleware
+app.use(bodyParser.urlencoded({ extended: true}));
+
 // --------------------------------
 // Instagram Authentification
 // Overide instagram authentification
@@ -18,7 +21,9 @@ ig.use({
   client_secret: "e37f5afad6e74ac5906380de076da0d4"
 });
 
-var redirect_uri = "https://lit-journey-12058.herokuapp.com/handleauth";
+//https://lit-journey-12058.herokuapp.com/handleauth
+var redirect_uri = "http://localhost:3000/handleauth";
+
 
 // Authorize the user by redirecting user to sign in page
 exports.authorize_user = function(req, res) {
@@ -31,14 +36,14 @@ exports.handleauth = function(req, res) {
     if (err) {
       console.log(err.body);
       res.send("Didn't work");
+      slack.send({
+            text: "Login Unseccessful :("
+      });
     } else {
       console.log('Yay! Access token is ' + result.access_token);
-      var reply = slack.respond(req.body,function(hook) {
-          return {
-              "text": "This is a line of text in a channel. \nAnd this is another line of text."
-          };
+      slack.send({
+            text: "Log in Successful!\n Welcome to Go Outside Challenge!"
       });
-      res.json(reply);
     }
   });
 };
@@ -47,14 +52,11 @@ exports.handleauth = function(req, res) {
 // This is where you would initially send users to authorize
 app.get('/authorize_user', exports.authorize_user);
 // This is redirect URI
-app.post('/handleauth', exports.handleauth);
+app.get('/handleauth', exports.handleauth);
 
 // ---------------------------------
 
 
-
-// body parser middleware
-app.use(bodyParser.urlencoded({ extended: true}));
 
 // test route
 app.get('/', function (req, res) { res.status(200).send('Hello World!') });
