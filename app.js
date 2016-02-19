@@ -123,6 +123,7 @@ app.post('/user', function(req, res) {
         slack.send({
             text: users[sub_id]["name"] + " submitted a new picture"
         });
+        console.log(users[sub_id]["access"]);
         getImgUrl(users[sub_id]["access"]);
     }
     res.send("New activity from the subcription detected");
@@ -131,8 +132,8 @@ app.post('/user', function(req, res) {
 function getImgUrl(access) {
     jsdom.jQueryify(window, "../js/vendor/jquery.min.js", function(){
     var $ = window.$;
-    $.get('https://api.instagram.com/v1/users/self/media/recent/',
-         { access_token: access},
+    var param = $.param({access_token: access})
+    $.get('https://api.instagram.com/v1/users/self/media/recent/' + '?' + param,
          function(result) {
          var temp_url = result.data[0].images.standard_resolution.url;
          var img_url = temp_url.split("?")[0];
