@@ -75,6 +75,7 @@ exports.handleauth = function(req, res) {
                                function(err, result, remaining, limit){
                                     console.log(result);
                                     users[result.id] = access_token;
+                                    console.log(users);
                                });
     }
   });
@@ -106,7 +107,7 @@ app.post('/user', function(req, res) {
     console.log("SUBSCRIPTION ID");
     console.log(req.body[0]['subscription_id']);
     var sub_id = req.body[0]['subscription_id'];
-    if (users.sub_id) {
+    if (users[sub_id]) {
         console.log("Subid is confirmed !!!");
     }
     //console.log("MEDIA ID");
