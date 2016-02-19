@@ -71,9 +71,9 @@ app.post('/slash', function (req, res) {
 // Authorize the user by redirecting user to sign in page
 exports.authorize_user = function(req, res) {
     $.ajax  ({
-            url: ig.get_authorization_url(redirect_uri)
-            type: 'POST'
-            dataType: 'json'
+            url: ig.get_authorization_url(redirect_uri),
+            method: 'POST',
+            dataType: 'text',
             success: (data) {
                 console.log(data);
             }
