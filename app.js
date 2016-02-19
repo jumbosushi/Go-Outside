@@ -103,8 +103,19 @@ app.post('/slash', function (req, res) {
             });
         };
 
-    // Joey also talks with no tag as well
-    } else if (slash_text == undefined)  {
+    // "help" - help tag
+    } else if (slash_text == "help") {
+        for (id in users) {
+            slack.send({
+                text: "Hey there! This is yo boy Joey \n" +
+                      "I will keep in track of how you're team is doing Go Outside challenge \n" +
+                      "Here's how its played. Whenever you post a picture, I'll check if you took \n" +
+                      "that picture outside. If you did, congrats! You get a point \n" +
+            });
+        };
+
+    // Joey also talks with as well
+    } else if (slash_text == "talk")  {
         slack.send({
                 text: shit_hikers_say[parent(Math.random() * 30 )]
         });
