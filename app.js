@@ -31,18 +31,18 @@ var shit_hikers_say = {
     4: "No rain no pain no Maine",
     5: "How’s the water source look?",
     6: "How many miles you doing today",
-    7: "Damn It smells like hiker in here" ,
+    7: "Dang It smells like hiker in here" ,
     8: "How’s the privy look",
     9: "No bear cables?",
-    10: "Fuck the smokeys",
+    10: "Duck the smokeys",
     11: "When’s the next resupply",
     12: "What day is it",
     13: "Tent or shelter",
-    14: "Dig a hole",
+    14: "Yo let's dig a hole",
     15: "What’s the weather look like today?",
     16: "Man I’m craving a burger",
     17: "First world problem",
-    18: "I had a scooter sighting",
+    18: "COCONUT OIL. nuff said",
     19: "Skinny white guy with the beard",
     20: "You got a lighter",
     21: "Is that ultra light",
@@ -51,9 +51,9 @@ var shit_hikers_say = {
     24: "That’s an unsolicited pro-tip",
     25: "Who makes that",
     26: "White gas or alcohol",
-    27: "Where’s the closest place I can get beer",
+    27: "Where’s the closest place I can get butter chicken",
     28: "We could hitch?",
-    29: "Have you seen a blaze recently?"
+    29: "I'm a professional zombie hunter \n Have you seen zombie recently? Yeah, you're welcome"
 }
 
 // for Instagram API
@@ -76,8 +76,9 @@ ig.use({
 
 // Slash commands
 app.post('/slash', function (req, res) {
-    var slash_text = req.body.text;
 
+    var slash_text = req.body.text;
+    console.log(slash_text);
     // "login" - let the user log in
     if (slash_text == "login") {
         user_name = req.body.user_name; // store the username temporally
@@ -104,7 +105,7 @@ app.post('/slash', function (req, res) {
         };
 
     // Joey also talks with no tag as well
-    } else if (slash_text == " ")  {
+    } else if (slash_text == "")  {
         slack.send({
                 text: shit_hikers_say[(Math.random() * 30 )]
         });
@@ -199,7 +200,7 @@ function getImgUrl(access) {
              console.log(img_url);
              var result = clarifai.run(img_url);
             console.log(result);
-         });
+    });
 };
 
 // -------------------------------------
