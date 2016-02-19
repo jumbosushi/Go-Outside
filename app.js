@@ -96,7 +96,7 @@ app.post('/slash', function (req, res) {
         };
 
     // else return something else
-    } else if (slash_text == null)  {
+    } else if (slash_text == undefined)  {
         slack.send({
                 text: shit_hikers_say[(Math.random() * 30 )]
         });
