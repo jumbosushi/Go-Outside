@@ -33,12 +33,17 @@ ig.use({
 
 // Slash command login
 app.post('/slash', function (req, res) {
-    console.log(req.body);
-    user_name = req.body.user_name;
     if (req.body.text == "login") {
+        user_name = req.body.user_name; // store the username temporally
         slack.send({
             text: "<https://lit-journey-12058.herokuapp.com/authorize_user|Sign in from here!>"
         });
+    } else if (req.body.text == "stats") {
+        for (id in users) {
+            slack.send({
+                text: users[id][name] + " has " + users[id][score] + " points!"
+            });
+        };
     } else {
         slack.send({
             text: "Can't recognize the tag. Try something else plz."
@@ -72,10 +77,12 @@ exports.handleauth = function(req, res) {
             text: "Log in Successful!\n Welcome to Go Outside Challenge!"
       });
       // Instagram subscription
+      // initializes the user profile
       ig.add_user_subscription('https://lit-journey-12058.herokuapp.com/user',
                                function(err, result, remaining, limit){
                                     users[result.id] = {"access": access_token,
-                                                        "name": user_name};
+                                                        "name": user_name,
+                                                        "score": 0};
                                     console.log(users);
                                });
     }
