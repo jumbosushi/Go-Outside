@@ -131,8 +131,7 @@ app.post('/user', function(req, res) {
                                                      medias,
                                                      pagination,
                                                      remaining,
-                                                     limit) { return medias});
-        console.log(recent);
+                                                     limit) { console.log(medias});
     }
     res.send("New activity from the subcription detected");
 } );
