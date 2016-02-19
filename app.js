@@ -68,7 +68,6 @@ exports.handleauth = function(req, res) {
       ig.subscriptions(function(err, result, remaining, limit){});
       ig.add_user_subscription('https://lit-journey-12058.herokuapp.com/user',
                                function(err, result, remaining, limit){});
-      });
     }
   });
 };
