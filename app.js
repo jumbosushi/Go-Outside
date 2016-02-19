@@ -41,7 +41,7 @@ app.post('/slash', function (req, res) {
     } else if (req.body.text == "stats") {
         for (id in users) {
             slack.send({
-                text: users[id][name] + " has " + users[id][score] + " points!"
+                text: users[id]["name"] + " has " + users[id]["score"] + " points!"
             });
         };
     } else {
@@ -111,12 +111,9 @@ app.get('/user', function(req, res) {
 // Fired when any of the user uploads a new file.
 // Check if the file uploaded counts as a point.
 app.post('/user', function(req, res) {
-    console.log(req.body);
-    console.log("SUBSCRIPTION ID");
-    console.log(req.body[0]['subscription_id']);
     var sub_id = req.body[0]['subscription_id'];
     if (users[sub_id]) {
-        console.log(users[sub_id][name] + " submitted a new picture");
+        console.log(users[sub_id]["name"] + " submitted a new picture");
     }
     //console.log("MEDIA ID");
     //console.log(req.body[0]['data']['media_id']);
