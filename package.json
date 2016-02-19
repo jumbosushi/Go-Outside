@@ -1,0 +1,19 @@
+{
+  "name": "go-outside",
+  "version": "1.0.0",
+  "description": "Slack bot to make your employees go outside",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jumbosushi/Go-Outside.git"
+  },
+  "author": "Atsushi Yamamoto",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jumbosushi/Go-Outside/issues"
+  },
+  "homepage": "https://github.com/jumbosushi/Go-Outside#readme"
+}
