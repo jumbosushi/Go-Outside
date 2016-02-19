@@ -99,9 +99,8 @@ app.get('/user', function(req, res) {
 app.post('/user', function(req, res) {
     console.log(req.body);
     console.log(req.params);
-    console.log(req);
     slack.send({
-            text: res
+            text: "A new picture eh"
     });
     res.send("New activity from the subcription detected");
 } );
