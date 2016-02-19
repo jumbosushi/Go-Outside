@@ -126,12 +126,13 @@ app.post('/user', function(req, res) {
         slack.send({
             text: users[sub_id]["name"] + " submitted a new picture"
         });
-            var recent = ig.user_media_recent("{"+users[sub_id]["access"]+"}",
-                                           function(err,
-                                                     medias,
-                                                     pagination,
-                                                     remaining,
-                                                     limit) { console.log(medias)});
+     ig.user_media_recent("{"+users[sub_id]["access"]+"}",
+                           function(err,
+                                     medias,
+                                     pagination,
+                                     remaining,
+                                     limit) { console.log(medias);
+                                              console.log("Is this part even runnign?")});
     }
     res.send("New activity from the subcription detected");
 } );
