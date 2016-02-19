@@ -87,7 +87,7 @@ app.get('/user', function(req, res) {
     slack.send({
             text: req.query
     });
-    res.send(req.query.'hub.challenge');
+    res.send(req.query['hub.challenge']);
     ig.subscriptions(function(err, subscriptions, remaining, limit){
         console.log(subscriptions);
     });
