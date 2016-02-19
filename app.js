@@ -2,9 +2,10 @@ var http = require('http');
 var hellobot = require('./hellobot');
 var express = require('express');
 var bodyParser = require('body-parser');
+var $;
 var jsdom = require('jsdom'), window = jsdom.jsdom().defaultView;
 jsdom.jQueryify(window, "../js/vendor/jquery.min.js", function(){
-    var $ = window.$;
+    $ = window.$;
 })
 var ig = require('instagram-node').instagram({});
 var Slack = require('node-slack');
