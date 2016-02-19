@@ -105,9 +105,9 @@ app.post('/slash', function (req, res) {
         };
 
     // Joey also talks with no tag as well
-    } else if (slash_text == "")  {
+    } else if (slash_text == undefined)  {
         slack.send({
-                text: shit_hikers_say[(Math.random() * 30 )]
+                text: shit_hikers_say.(Math.random() * 30 )
         });
 
        // else return something else
@@ -205,11 +205,12 @@ function getImgUrl(access) {
     });
 };
 
-// check if the picture containts
+// check if the picture was take outside
+// if so, the user get a point
 function check_outdoor(result, name, user) {
     result = result.split(", ");
-    for (tag in result) {
-        if (result[tag] == "outside" || result[tag] = "street") {
+    for (var tag in result) {
+        if (tag == "outside" || tag = "street") {
             slack.send({
             text: name + " did it! Way to go for being outside! (wait wut?)"
                   + "You get 1 points."
