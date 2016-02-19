@@ -12,6 +12,8 @@ var port = process.env.PORT || 3000;
 
 // body parser middleware
 app.use(bodyParser.urlencoded({ extended: true}));
+app.use(bodyParser.json());
+
 
 // --------------------------------
 // Instagram Authentification
@@ -21,16 +23,29 @@ ig.use({
   client_secret: "e37f5afad6e74ac5906380de076da0d4"
 });
 
+// Slash command login
+app.post('/slash', function (req, res) {
+    if (req.query.text == "login") {
+        slack.send({
+            text: "<http://localhost:3000/authorize_user|Sign in from here!>"
+        });
+    } else {
+        slack.send({
+            text: "Can't recognize the tag. Try something else plz."
+        });
+        res.send("Slash tag can't be recognized");
+    }
+});
+
 //https://lit-journey-12058.herokuapp.com/handleauth
 var redirect_uri = "http://localhost:3000/handleauth";
-
 
 // Authorize the user by redirecting user to sign in page
 exports.authorize_user = function(req, res) {
   res.redirect(ig.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
 };
 
-// Send message on general that the user is signed in
+// Send message on #general that the user is signed in
 exports.handleauth = function(req, res) {
   ig.authorize_user(req.query.code, redirect_uri, function(err, result) {
     if (err) {
@@ -71,5 +86,5 @@ app.listen(port, function () {
     console.log('Slack bot listening on port ' + port);
 })
 
-// handle the "hello" api call
+// handle the "hello" api call (test case)
 app.post('/hello', hellobot);
