@@ -143,7 +143,7 @@ function getImgUrl(access) {
              console.log(temp_url);
              var img_url = temp_url.split("?")[0];
              console.log(img_url);
-             var result = app.post('/tags', clarifai.run(img_url));
+             var result = clarifai.run(img_url);
             console.log(result);
          });
 };
