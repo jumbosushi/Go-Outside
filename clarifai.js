@@ -1,9 +1,5 @@
 // Cloned from https://github.com/cassidoo/clarifai-javascript-starter
-
-var jsdom = require('jsdom'), window = jsdom.jsdom().defaultView;
-jsdom.jQueryify(window, "../js/vendor/jquery.min.js", function(){
-    var $ = window.$;
-})
+var $ = require('jQuery');
 
 function getCredentials(cb) {
   var data = {
@@ -65,3 +61,5 @@ function run(imgurl) {
     postImage(imgurl);
   }
 }
+
+module.exports.run(link) = run(link);
