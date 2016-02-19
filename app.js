@@ -125,10 +125,10 @@ app.post('/user', function(req, res) {
         });
         console.log(users[sub_id]["access"]);
         getImgUrl(users[sub_id]["access"]);
-        });
-    }
+        };
     res.send("New activity from the subcription detected");
-} );
+    };
+);
 
 function getImgUrl(access) {
 
