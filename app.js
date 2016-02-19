@@ -38,7 +38,8 @@ app.post('/slash', function (req, res) {
 });
 
 //https://lit-journey-12058.herokuapp.com/handleauth
-var redirect_uri = "http://localhost:3000/handleauth";
+//http://localhost:3000/handleauth
+var redirect_uri = "https://lit-journey-12058.herokuapp.com/handleauth";
 
 // Authorize the user by redirecting user to sign in page
 exports.authorize_user = function(req, res) {
