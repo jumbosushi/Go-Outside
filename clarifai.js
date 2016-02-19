@@ -62,4 +62,4 @@ function run(imgurl) {
   }
 }
 
-module.exports.run(link) = run(link);
+module.exports(img_url) = run(link);
