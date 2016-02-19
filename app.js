@@ -4,6 +4,8 @@ var express = require('express');
 var bodyParser = require('body-parser');
 //var $ = require('jQuery');
 var ig = require('instagram-node').instagram();
+var Slack = require('node-slack');
+var slack = new Slack(hook_url,options);
 
 var app = express();
 var port = process.env.PORT || 3000;
