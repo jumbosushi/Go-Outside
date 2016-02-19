@@ -28,6 +28,7 @@ ig.use({
 
 // Slash command login
 app.post('/slash', function (req, res) {
+    console.log(req.body);
     if (req.query.text == "login") {
         slack.send({
             text: "<https://lit-journey-12058.herokuapp.com/authorize_user|Sign in from here!>"
@@ -41,9 +42,6 @@ app.post('/slash', function (req, res) {
     }
 });
 
-// Below links kept here for testing purposes
-//https://lit-journey-12058.herokuapp.com/handleauth
-//http://localhost:3000/handleauth
 var redirect_uri = "https://lit-journey-12058.herokuapp.com/handleauth";
 
 // Authorize the user by redirecting user to sign in page
@@ -71,21 +69,21 @@ exports.handleauth = function(req, res) {
       // Instagram subscription
       ig.add_user_subscription('https://lit-journey-12058.herokuapp.com/user',
                                function(err, result, remaining, limit){
-                                    console.log(access_token);
+                                    console.log(result);
                                });
     }
   });
 };
 
 
-// This is where pi initially send users to authorize
+// This is where api initially send users to authorize
 app.get('/authorize_user', exports.authorize_user);
-// This is redirect URI
+// This is redirecting URI
 app.get('/handleauth', exports.handleauth);
 
-// ---------------------------------
 
-// Instagram subscrription API endpoints
+// ---------------------------------
+// Instagram subscrription
 
 // Subscribe the user when the user loggs in
 app.get('/user', function(req, res) {
@@ -102,10 +100,8 @@ app.post('/user', function(req, res) {
     console.log(req.body);
     console.log("SUBSCRIPTION ID");
     console.log(req.body[0]['subscription_id']);
-    console.log("SUBSCRIPTION ID ROUND 2");
-    console.log(req.body['subscription_id']);
     console.log("MEDIA ID");
-    console.log(req.body['data']['media_id']);
+    console.log(req.body[0]['data']['media_id']);
     slack.send({
             text: "A new picture eh"
     });
