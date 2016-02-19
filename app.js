@@ -88,8 +88,9 @@ app.get('/user', function(req, res) {
             text: "I subscribed to the feed!"
     });
     ig.subscriptions(function(err, subscriptions, remaining, limit){
-    console.log(subscriptions);
-    res.send("Subscription Added");
+        console.log(subscriptions);
+        res.send("Subscription Added");
+    });
 });
 
 app.post('/user', function(req, res) {
