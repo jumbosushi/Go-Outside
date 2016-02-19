@@ -90,6 +90,7 @@ exports.handleauth = function(req, res) {
       });
     }
   });
+  res.end('It worked!')
 };
 
 // Instagram subscription
