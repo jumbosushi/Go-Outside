@@ -20,6 +20,39 @@ var access_token;
 var users = {};
 var user_name;
 var user_id;
+var shit_hikers_say = {
+    // found on http://iandolij.tumblr.com/post/50120585724/shit-hikers-say
+    0: "Hike your own hike, man",
+    1: "What’s your base weight",
+    2: "How do you purify",
+    3: "It’s smiles not miles",
+    4: "No rain no pain no Maine",
+    5: "How’s the water source look?",
+    6: "How many miles you doing today",
+    7: "Damn It smells like hiker in here" ,
+    8: "How’s the privy look",
+    9: "No bear cables?",
+    10: "Fuck the smokeys",
+    11: "When’s the next resupply",
+    12: "What day is it",
+    13: "Tent or shelter",
+    14: "Dig a hole",
+    15: "What’s the weather look like today?",
+    16: "Man I’m craving a burger",
+    17: "First world problem",
+    18: "I had a scooter sighting",
+    19: "Skinny white guy with the beard",
+    20: "You got a lighter",
+    21: "Is that ultra light",
+    22: "Fire drill",
+    23: "How much weight you loose",
+    24: "That’s an unsolicited pro-tip",
+    25: "Who makes that",
+    26: "White gas or alcohol",
+    27: "Where’s the closest place I can get beer",
+    28: "We could hitch?",
+    29: "Have you seen a blaze recently?"
+}
 
 // for Instagram API
 var redirect_uri = "https://lit-journey-12058.herokuapp.com/handleauth"; //TODO
@@ -48,7 +81,8 @@ app.post('/slash', function (req, res) {
         user_name = req.body.user_name; // store the username temporally
         user_id = req.body.user_id; // store the user_id temporally
         slack.send({
-            text: "<https://lit-journey-12058.herokuapp.com/authorize_user|Sign in from here!>" //TODO
+            text: "<https://lit-journey-12058.herokuapp.com/authorize_user|Join the party!>" +
+                  "\n You'll need your insagra account."//TODO
         });
 
     // "stats" - show the current standing of people in the game
@@ -60,11 +94,16 @@ app.post('/slash', function (req, res) {
         };
 
     // else return something else
+    } else if (slash_text == "")  {
+        slack.send({
+                text: shit_hikers_say[(Math.random() * 30 )]
+        });
     } else {
         slack.send({
             text: "Can't recognize the tag. Try something else plz."
         });
     }
+    res.end();
 });
 
 
@@ -86,7 +125,7 @@ exports.handleauth = function(req, res) {
       console.log('Yay! Access token is ' + result.access_token);
       access_token = result.access_token;
       slack.send({
-            text: "Log in Successful!\n Welcome to Go Outside Challenge!"
+            text: "Log in Successful!\n Welcome to Go Outside Challenge dawg!"
       });
     }
   });
@@ -99,7 +138,7 @@ exports.handleauth = function(req, res) {
                                                         "score": 0};
                                     console.log(users);
                                });
-  res.end('It worked!')
+  res.end('It worked!');
 };
 
 
@@ -117,7 +156,7 @@ app.get('/handleauth', exports.handleauth);
 // Subscribe the user when the user loggs in
 app.get('/user', function(req, res) {
     slack.send({
-            text: "Subcription Complete!"
+            text: "You're part of the club! \n The first rule of Go Outside Club is to always talk about Go Outside Club"
     });
     // Instagram API completes subscription when 'hub.challenge' is send back
     res.send(req.query['hub.challenge']);
