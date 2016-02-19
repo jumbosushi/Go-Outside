@@ -83,8 +83,9 @@ app.get('/handleauth', exports.handleauth);
 // Instagram subscrription API endpoints
 
 app.get('/user', function(req, res) {
+    console.log(req.query);
     slack.send({
-            text: "I subscribed to the feed!"
+            text: req.query
     });
     res.send(req.query.hub.challenge);
     ig.subscriptions(function(err, subscriptions, remaining, limit){
