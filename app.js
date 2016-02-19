@@ -2,7 +2,7 @@ var http = require('http');
 var hellobot = require('./hellobot');
 var express = require('express');
 var bodyParser = require('body-parser');
-//var $ = require('jQuery');
+var $ = require('jQuery');
 var ig = require('instagram-node').instagram({});
 var Slack = require('node-slack');
 var slack = new Slack("https://hooks.slack.com/services/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");
@@ -33,12 +33,15 @@ ig.use({
 
 // Slash command login
 app.post('/slash', function (req, res) {
-    if (req.body.text == "login") {
+    console.log("DOES THIS PLACE HAVE USER ID???")
+    console.log(req.body);
+    var slash_text = req.body.text;
+    if (slash_text == "login") {
         user_name = req.body.user_name; // store the username temporally
         slack.send({
             text: "<https://lit-journey-12058.herokuapp.com/authorize_user|Sign in from here!>"
         });
-    } else if (req.body.text == "stats") {
+    } else if (slash_text == "stats") {
         for (id in users) {
             slack.send({
                 text: users[id]["name"] + " has " + users[id]["score"] + " points!"
@@ -113,13 +116,12 @@ app.get('/user', function(req, res) {
 app.post('/user', function(req, res) {
     var sub_id = req.body[0]['subscription_id'];
     if (users[sub_id]) {
-        console.log(users[sub_id]["name"] + " submitted a new picture");
+        slack.send({
+            text: users[sub_id]["name"] + " submitted a new picture"
+        });
     }
     //console.log("MEDIA ID");
     //console.log(req.body[0]['data']['media_id']);
-    slack.send({
-            text: "A new picture eh"
-    });
     res.send("New activity from the subcription detected");
 } );
 
