@@ -210,7 +210,7 @@ function getImgUrl(access) {
 function check_outdoor(result, name, user) {
     result = result.split(", ");
     for (var tag in result) {
-        if ( tag == "outside" || tag = "street") {
+        if ( tag == "outside" || tag == "street") {
             slack.send({
             text: name + " did it! Way to go for being outside! (wait wut?)"
                   + "You get 1 points."
