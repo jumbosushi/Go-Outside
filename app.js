@@ -70,7 +70,9 @@ exports.handleauth = function(req, res) {
       });
       // Instagram subscription
       ig.add_user_subscription('https://lit-journey-12058.herokuapp.com/user',
-                               function(err, result, remaining, limit){});
+                               function(err, result, remaining, limit){
+                                    console.log(result.access_token);
+                               });
     }
   });
 };
@@ -87,10 +89,10 @@ app.get('/handleauth', exports.handleauth);
 
 // Subscribe the user when the user loggs in
 app.get('/user', function(req, res) {
-    console.log(req.query);
     slack.send({
             text: "Subcription Complete!"
     });
+    // Instagram API completes subscription when 'hub.challenge' is send back
     res.send(req.query['hub.challenge']);
 });
 
@@ -98,7 +100,10 @@ app.get('/user', function(req, res) {
 // Check if the file uploaded counts as a point.
 app.post('/user', function(req, res) {
     console.log(req.body);
-    console.log(req.params);
+    console.log("SUBSCRIPTION ID");
+    console.log(req.body.subscription_id);
+    console.log("MEDIA ID");
+    console.log(req.body.data.media_id);
     slack.send({
             text: "A new picture eh"
     });
