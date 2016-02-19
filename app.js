@@ -25,6 +25,7 @@ ig.use({
 
 // Slash command login
 app.post('/slash', function (req, res) {
+    console.log(req.query);
     if (req.query.text == "login") {
         slack.send({
             text: "<http://localhost:3000/authorize_user|Sign in from here!>"
