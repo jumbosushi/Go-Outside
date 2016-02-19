@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 var $ = require('jQuery');
 var ig = require('instagram-node').instagram({});
 var Slack = require('node-slack');
+var xml = require('xmlhttprequest');
 var slack = new Slack("https://hooks.slack.com/services/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");
 
 var app = express();
