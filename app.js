@@ -2,11 +2,7 @@ var http = require('http');
 var hellobot = require('./hellobot');
 var express = require('express');
 var bodyParser = require('body-parser');
-var $;
 var jsdom = require('jsdom'), window = jsdom.jsdom().defaultView;
-jsdom.jQueryify(window, "../js/vendor/jquery.min.js", function(){
-    $ = window.$;
-})
 var ig = require('instagram-node').instagram({});
 var Slack = require('node-slack');
 var slack = new Slack("https://hooks.slack.com/services/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");
@@ -133,13 +129,16 @@ app.post('/user', function(req, res) {
 } );
 
 function getImgUrl(access) {
-  $.get('https://api.instagram.com/v1/users/self/media/recent/',
+    jsdom.jQueryify(window, "../js/vendor/jquery.min.js", function(){
+    var $ = window.$;
+    });
+    $.get('https://api.instagram.com/v1/users/self/media/recent/',
          { access_token: access},
          function(result) {
          var temp_url = result.data[0].images.standard_resolution.url;
          var img_url = temp_url.split("?")[0];
          console.log(img_url);
-  });
+    });
 }
 
 // -------------------------------------
