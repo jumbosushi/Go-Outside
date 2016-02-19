@@ -85,13 +85,9 @@ app.get('/handleauth', exports.handleauth);
 app.get('/user', function(req, res) {
     console.log(req.query);
     slack.send({
-            text: req.query
+            text: "Subcription Complete!"
     });
     res.send(req.query['hub.challenge']);
-    ig.subscriptions(function(err, subscriptions, remaining, limit){
-        console.log(subscriptions);
-    });
-    res.send("Subscription Added");
 });
 
 app.post('/user', function(req, res) {
