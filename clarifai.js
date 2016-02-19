@@ -7,7 +7,7 @@ function getCredentials(cb) {
   var data = {
     'grant_type': 'client_credentials',
     'client_id': "LPOXuuwXLHA2yZ7fBrN_DAHTsu26s2mR9h4DVmMa",
-    'client_secret': "VMEOyjHqQqIRRdpNL-o8wmfEpnsObF9ksIaPJ2Yt"
+    'client_secret': VMEOyjHqQqIRRdpNL-o8wmfEpnsObF9ksIaPJ2Yt"
   };
 
   return $.ajax({
@@ -53,17 +53,16 @@ function parseResponse(resp) {
   return tags;
 }
 
-function run(imgurl) {
-  if (localStorage.getItem('tokenTimeStamp') - Math.floor(Date.now() / 1000) > 86400
-    || localStorage.getItem('accessToken') === null) {
-    getCredentials(function() {
-      postImage(imgurl);
-    });
-  } else {
-    postImage(imgurl);
-  }
-}
 
 module.exports = {
-    run: run()
+    run: function run(imgurl) {
+          if (localStorage.getItem('tokenTimeStamp') - Math.floor(Date.now() / 1000) > 86400
+            || localStorage.getItem('accessToken') === null) {
+            getCredentials(function() {
+              postImage(imgurl);
+            });
+          } else {
+            postImage(imgurl);
+          }
+        }
 }
