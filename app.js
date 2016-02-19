@@ -99,7 +99,7 @@ app.get('/user', function(req, res) {
 app.post('/user', function(req, res) {
     console.log(req.body);
     slack.send({
-            text: req.body;
+            text: req.body
     });
     res.send("New activity from the subcription detected");
 } );
