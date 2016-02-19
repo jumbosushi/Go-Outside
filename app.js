@@ -110,7 +110,7 @@ app.post('/slash', function (req, res) {
                 text: "Hey there! This is yo boy Joey \n" +
                       "I will keep in track of how you're team is doing Go Outside challenge \n" +
                       "Here's how its played. Whenever you post a picture, I'll check if you took \n" +
-                      "that picture outside. If you did, congrats! You get a point \n" +
+                      "that picture outside. If you did, congrats! You get a point \n"
             });
         };
 
