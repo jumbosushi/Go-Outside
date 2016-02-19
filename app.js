@@ -90,7 +90,7 @@ exports.handleauth = function(req, res) {
       // initializes the user profile
       ig.add_user_subscription('https://lit-journey-12058.herokuapp.com/user', //TODO
                                function(err, result, remaining, limit){
-                                    users[result.id] = {"access": user_id,
+                                    users[result.id] = {"access": access_token,
                                                         "name": user_name,
                                                         "score": 0};
                                     console.log(users);
@@ -126,11 +126,20 @@ app.post('/user', function(req, res) {
         slack.send({
             text: users[sub_id]["name"] + " submitted a new picture"
         });
-        ig.user_self_media_recent(function(err, medias, pagination, remaining, limit) {console.log(medias);
-                                              console.log("Is this part even runnign?")});
+        getImgUrl(users[sub_id]["access"]);
     }
     res.send("New activity from the subcription detected");
 } );
+
+function getImgUrl(access) {
+  $.get('https://api.instagram.com/v1/users/self/media/recent/',
+         { access_token: access},
+         function(result) {
+         var temp_url = result.data[0].images.standard_resolution.url;
+         var img_url = temp_url.split("?")[0];
+         console.log(img_url);
+  });
+}
 
 // -------------------------------------
 
