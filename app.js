@@ -36,29 +36,34 @@ app.use(bodyParser.json());
 // Overide instagram authentification
 ig.use({
   client_id: "bd09eab6bd9b4c9daf691a550faf04a9",
-  client_secret: "e37f5afad6e74ac5906380de076da0d4"
+  client_secret: "95b76f3db7314eaea2bfefd9569a33ec"
 });
 
-// Slash command login
+// Slash commands
 app.post('/slash', function (req, res) {
     var slash_text = req.body.text;
+
+    // "login" - let the user log in
     if (slash_text == "login") {
         user_name = req.body.user_name; // store the username temporally
         user_id = req.body.user_id; // store the user_id temporally
         slack.send({
             text: "<https://lit-journey-12058.herokuapp.com/authorize_user|Sign in from here!>" //TODO
         });
+
+    // "stats" - show the current standing of people in the game
     } else if (slash_text == "stats") {
         for (id in users) {
             slack.send({
                 text: users[id]["name"] + " has " + users[id]["score"] + " points!"
             });
         };
+
+    // else return something else
     } else {
         slack.send({
             text: "Can't recognize the tag. Try something else plz."
         });
-        res.send("Slash tag can't be recognized");
     }
 });
 
@@ -159,6 +164,3 @@ app.use(function (err, req, res, next) {
 app.listen(port, function () {
     console.log('Slack bot listening on port ' + port);
 })
-
-// handle the "hello" api call (test case)
-app.post('/hello', hellobot);
