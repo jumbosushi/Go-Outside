@@ -88,19 +88,19 @@ exports.handleauth = function(req, res) {
       slack.send({
             text: "Log in Successful!\n Welcome to Go Outside Challenge!"
       });
-      // Instagram subscription
-      // initializes the user profile
-      ig.add_user_subscription('https://lit-journey-12058.herokuapp.com/user', //TODO
+    }
+  });
+};
+
+// Instagram subscription
+// initializes the user profile
+ig.add_user_subscription('https://lit-journey-12058.herokuapp.com/user',
                                function(err, result, remaining, limit){
                                     users[result.id] = {"access": access_token,
                                                         "name": user_name,
                                                         "score": 0};
                                     console.log(users);
                                });
-    }
-  });
-};
-
 
 // This is where api initially send users to authorize
 app.get('/authorize_user', exports.authorize_user);
