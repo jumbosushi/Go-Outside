@@ -26,6 +26,7 @@ var redirect_uri = "https://lit-journey-12058.herokuapp.com/handleauth";
 
 // Collect Clarifai tags
 var ig_picture_tags;
+var ig_picture_url;
 // overide instagram authentification
 ig.use({
     client_id: "bd09eab6bd9b4c9daf691a550faf04a9",
@@ -218,8 +219,8 @@ function getImgUrl(access) {
             var ig_result = JSON.parse(string_ver);
             var temp_url = ig_result.data[0].images.standard_resolution.url;
             console.log(temp_url);
-            var img_url = temp_url.split("?")[0];
-            console.log(img_url);
+            ig_picture_url = temp_url.split("?")[0];
+            console.log(ig_picture_url);
             ig_picture_tags = clarifai.run(img_url);
             console.log(ig_picture_tags);   // TODO - returns undefined
         });
@@ -232,6 +233,11 @@ function check_outdoor(result, name, user) {
     console.log(result);
     for (var tag in result) {
         if (tag == "outside" || tag == "street") {
+            // post a picture that passed the test
+            slack.send({
+                text: ig_picture_url
+            });
+
             slack.send({
                 text: name + " did it! Way to go for being outside! (wait wut?)" + "You get 1 points."
             });
