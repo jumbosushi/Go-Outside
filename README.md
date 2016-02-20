@@ -13,10 +13,10 @@ Build w/ Express.js, and these notable add-ons:
 * @cassidoo's [clarifai-javascript-starter](https://github.com/cassidoo/clarifai-javascript-starter)
 
 # Table of Contents
-1. [Usage](#Usage)
-2. [Installation](#Installation)
-3. [Issues](#Issues)
-4. [License](#License)
+1. [Usage](#usage)
+2. [Installation](#installation)
+3. [Issues](#issues)
+4. [License](#license)
 5. [Todo](#todo)
 
 
@@ -52,6 +52,7 @@ Start by going to your team's App integration page
 
 Clink the "Build your own" button on the top right, and go to "Make a custom Integration"
 
+
 ![Configure_APP](http://i.imgur.com/4xSt8S9.png)
 
 Choose Slash Commands
@@ -79,6 +80,8 @@ Now you have a (almost) working slash command!
 From earlier custom Integration page, choose "Incoming Webhook"
 
 Add custom Integration
+
+
 ![Add Configuration](http://i.imgur.com/mwPIcge.png)
 
 Once your at the setting page:
