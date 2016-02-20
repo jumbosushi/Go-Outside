@@ -1,8 +1,6 @@
 // Express dependencies
 var http = require('http');
 var clarifai = require('./clarifai');
-var insta = require('./instagram');
-var sm = require('./slack_message')
 var express = require('express');
 var bodyParser = require('body-parser');
 var $ = require('jQuery');
@@ -22,9 +20,6 @@ var user_id;
 // body parser middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
-// Slash commands
-app.post('/slash',sm.slash);
 
 // for Instagram API
 var redirect_uri = "https://lit-journey-12058.herokuapp.com/handleauth";
@@ -71,7 +66,10 @@ var shit_joey_say = {
     29: "I'm a professional zombie hunter \n Have you seen zombie recently? Yeah, you're welcome"
 };
 
+
 // Slash commands
+app.post('/slash', exports.slash);
+
 exports.slash = function (req, res) {
 
                 var slash_text = req.body.text;
