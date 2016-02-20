@@ -56,13 +56,13 @@ function parseResponse(resp) {
 
 module.exports = {
     run: function run(imgurl) {
-      if (localStorage.getItem('tokenTimeStamp') - Math.floor(Date.now() / 1000) > 86400
-        || localStorage.getItem('accessToken') === null) {
-        getCredentials(function() {
-          postImage(imgurl);
-        });
-      } else {
-        postImage(imgurl);
-      }
-    }
+          if (localStorage.getItem('tokenTimeStamp') - Math.floor(Date.now() / 1000) > 86400
+            || localStorage.getItem('accessToken') === null) {
+            getCredentials(function() {
+              postImage(imgurl);
+            });
+          } else {
+            postImage(imgurl);
+          }
+        }
 }

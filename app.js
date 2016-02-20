@@ -221,6 +221,7 @@ function getImgUrl(access) {
             var img_url = temp_url.split("?")[0];
             console.log(img_url);
             ig_picture_tags = clarifai.run(img_url);
+            console.log(ig_picture_tags);
         });
 };
 
