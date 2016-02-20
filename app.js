@@ -24,6 +24,8 @@ app.use(bodyParser.json());
 // for Instagram API
 var redirect_uri = "https://lit-journey-12058.herokuapp.com/handleauth";
 
+// Collect Clarifai tags
+var ig_picture_tags;
 // overide instagram authentification
 ig.use({
     client_id: "bd09eab6bd9b4c9daf691a550faf04a9",
@@ -63,7 +65,7 @@ var shit_joey_say = {
     26: "White gas or alcohol",
     27: "Where’s the closest place I can get butter chicken",
     28: "We could hitch?",
-    29: "I'm a professional zombie hunter \n Have you seen zombie recently? Yeah, you're welcome"
+    29: "I'm a professional zombie hunter. Have you seen a zombie recently? Yeah, you're welcome"
 };
 
  function slash_cmd(req, res) {
@@ -96,7 +98,7 @@ var shit_joey_say = {
     // "help" - explain the game
     } else if (slash_text == "help") {
         slack.send({
-            text: "Hey there! This is yo boy Joey \n" +
+            text: "\nHey there! This is yo boy Joey \n" +
                 "I will keep in track of how your team is " +
                 "doing in the Go Outside game :rocket: \n" +
                 "Here's how its played. Whenever you post a picture on Instagram, " +
@@ -195,8 +197,8 @@ app.post('/user', function (req, res) {
             text: "Looks like " + users[sub_id]["name"] + " submitted a new picture"
         });
         console.log(users[sub_id]["access"]);
-        var temp_result = getImgUrl(users[sub_id]["access"]);
-        check_outdoor(temp_result, users[sub_id]["name"], users[sub_id]);
+        getImgUrl(users[sub_id]["access"]);
+        check_outdoor(ig_picture_tags, users[sub_id]["name"], users[sub_id]);
     };
     res.send("New activity from the subcription detected");
 });
@@ -211,9 +213,8 @@ function getImgUrl(access) {
             console.log(temp_url);
             var img_url = temp_url.split("?")[0];
             console.log(img_url);
-            var result = clarifai.run(img_url);
+            ig_picture_tags = clarifai.run(img_url);
             console.log(result);
-            return result;
         });
 };
 
