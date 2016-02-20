@@ -68,25 +68,33 @@ var shit_joey_say = {
     29: "I'm a professional zombie hunter. Have you seen a zombie recently? Yeah, you're welcome"
 };
 
+
+// slash commands
  function slash_cmd(req, res) {
-    var slash_text = req.body.text;
-    // "login" - let the user log in
-    if (slash_text == "login") {
-        user_name = req.body.user_name; // store the username temporally
-        user_id = req.body.user_id; // store the user_id temporally
-        slack.send({
-            text: "<https://lit-journey-12058.herokuapp.com/authorize_user|Join the party!>" +
+    switch (req.body.text) {
+        // "login" - let the user log in
+        case "login":
+            user_name = req.body.user_name; // store the username temporally
+            user_id = req.body.user_id; // store the user_id temporally
+            slack.send({
+                text: "<https://lit-journey-12058.herokuapp.com/authorize_user|Join the party!>" +
                   "\n You'll need your insagram account."
-        });
+            });
+            break;
 
-
-    // "stats" - show the current standing of people in the game
-    } else if (slash_text == "stats") {
-        for (id in users) {
+        // "stats" - show the current standing of people in the game
+         case "stats";
+            for (id in users) {
             slack.send({
                 text: users[id]["name"] + " has " + users[id]["score"] + " points!"
             });
-        };
+            };
+            break;
+
+
+
+    } else if (slash_text == "stats") {
+
 
 
     // "coconut oil" - coconut oil
@@ -118,6 +126,7 @@ var shit_joey_say = {
         slack.send({
             text: "Hmm not sure what tag that is. You mean Bacon?"
         });
+    };
     };
     res.end();
 };
