@@ -13,9 +13,19 @@ ig.use({
     client_secret: "95b76f3db7314eaea2bfefd9569a33ec"
 });
 
+var access_token; // hold the access Token of a user
+var users = {}; // key = user's subscription id,  val = access_token
+var user_name;
+var user_id;
 
 // All Instagram Modules should be moved her
 module.exports = {
+
+
+    // authorize the user by redirecting user to sign in page
+    authorize_user: function (req, res) {
+                        res.redirect(ig.get_authorization_url(redirect_uri))
+                    },
 
     // send message on #general that the user is signed in
     handleauth: function (req, res) {
@@ -47,10 +57,5 @@ module.exports = {
                                 console.log(users);
                         });
                         res.end('Joey is proud of ya');
-                    },
-
-    // authorize the user by redirecting user to sign in page
-    authorize_user: function (req, res) {
-                        res.redirect(ig.get_authorization_url(redirect_uri))
                     }
 }
