@@ -38,7 +38,7 @@ module.exports = {
                     },
 
     // authorize the user by redirecting user to sign in page
-    authorize_user = function (req, res) {
+    authorize_user: function (req, res) {
                         res.redirect(ig.get_authorization_url(redirect_uri))
                     }
 }
