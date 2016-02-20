@@ -1,6 +1,8 @@
-
+var http = require('http');
 var $ = require('jQuery');
 var ig = require('instagram-node').instagram({});
+var Slack = require('node-slack');
+var slack = new Slack("https://hooks.slack.com/services/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");
 
 // for Instagram API
 var redirect_uri = "https://lit-journey-12058.herokuapp.com/handleauth";

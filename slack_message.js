@@ -76,7 +76,7 @@ module.exports = {
                             "I'll check if you took \n"  +
                             "that picture outside. If you did, congrats! You get a point.\n" +
                             "Type '/go login' to get started!"
-                    });
+                     });
 
                 // "talk" - Choose a random phrase from shit_joey_say
                 } else if (slash_text == "talk") {
@@ -89,7 +89,7 @@ module.exports = {
                     slack.send({
                         text: "Hmm not sure what tag that is. You mean Bacon?"
                     });
-                }
+                };
                 res.end();
             }
 }
