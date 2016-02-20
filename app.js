@@ -209,6 +209,7 @@ app.post('/user', function (req, res) {
     res.send("New activity from the subcription detected");
 });
 
+// Parse JSON link from IG, and pass it to Clarifai.js
 function getImgUrl(access) {
     var url_param = $.param({
         access_token: access
