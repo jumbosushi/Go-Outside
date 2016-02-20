@@ -132,7 +132,7 @@ exports.slash = function (req, res) {
 // authorize the user by redirecting user to sign in page
 exports.authorize_user=  function (req, res) {
                         res.redirect(ig.get_authorization_url(redirect_uri))
-                        }:
+                        };
 
  // send message on #general that the user is signed in
 exports.handleauth = function (req, res) {
