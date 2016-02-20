@@ -67,9 +67,6 @@ var shit_joey_say = {
 };
 
 
-// Slash commands
-app.post('/slash', exports.slash);
-
 exports.slash = function (req, res) {
 
                 var slash_text = req.body.text;
@@ -125,6 +122,8 @@ exports.slash = function (req, res) {
                 res.end();
             };
 
+// Slash commands
+app.post('/slash', exports.slash);
 
 // -------------------------------------------
 
