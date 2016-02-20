@@ -19,57 +19,16 @@ var users = {}; // key = user's subscription id,  val = access_token
 var user_name;
 var user_id;
 
-
-// Joey's random talks
-var shit_joey_say = {
-    // found on http://iandolij.tumblr.com/post/50120585724/shit-hikers-say
-    0: "Hike your own hike, man",
-    1: "What’s your base weight",
-    2: "How do you purify",
-    3: "It’s smiles not miles",
-    4: "No rain no pain no Maine",
-    5: "How’s the water source look?",
-    6: "How many miles you doing today",
-    7: "Dang It smells like hiker in here",
-    8: "How’s the privy look",
-    9: "No bear cables?",
-    10: "Duck the smokeys",
-    11: "When’s the next resupply",
-    12: "What day is it",
-    13: "Tent or shelter",
-    14: "Yo let's dig a hole",
-    15: "What’s the weather look like today?",
-    16: "Man I’m craving a burger",
-    17: "First world problem",
-    18: "COCONUT OIL. nuff said",
-    19: "Skinny white guy with the beard",
-    20: "You got a lighter",
-    21: "Is that ultra light",
-    22: "Fire drill",
-    23: "How much weight you loose",
-    24: "That’s an unsolicited pro-tip",
-    25: "Who makes that",
-    26: "White gas or alcohol",
-    27: "Where’s the closest place I can get butter chicken",
-    28: "We could hitch?",
-    29: "I'm a professional zombie hunter \n Have you seen zombie recently? Yeah, you're welcome"
-}
-
 // body parser middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Slash commands
-app.post('/slash',
+app.post('/slash',sm.slash);
 
 // -------------------------------------------
 
 // Instagram Authentification
-// overide instagram authentification
-ig.use({
-    client_id: "bd09eab6bd9b4c9daf691a550faf04a9",
-    client_secret: "95b76f3db7314eaea2bfefd9569a33ec"
-});
 
 // api initially send users to authorize
 app.get('/authorize_user', insta.authorize_user);

@@ -5,6 +5,13 @@ var ig = require('instagram-node').instagram({});
 // for Instagram API
 var redirect_uri = "https://lit-journey-12058.herokuapp.com/handleauth";
 
+// overide instagram authentification
+ig.use({
+    client_id: "bd09eab6bd9b4c9daf691a550faf04a9",
+    client_secret: "95b76f3db7314eaea2bfefd9569a33ec"
+});
+
+
 // All Instagram Modules should be moved her
 module.exports = {
 
