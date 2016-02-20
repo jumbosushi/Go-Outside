@@ -102,7 +102,7 @@ app.post('/slash', function (req, res) {
                 "I will keep in track of how your team is doing in the Go Outside game :rocket: \n" +
                 "Here's how its played. Whenever you post a picture on Instagram, " +
                 "I'll check if you took \n"  +
-                "that picture outside. If you did, congrats! You get a point.\n"
+                "that picture outside. If you did, congrats! You get a point.\n" +
                 "Type '/go login' to get started!"
         });
 
