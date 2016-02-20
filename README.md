@@ -58,6 +58,8 @@ Clink the "Build your own" button on the top right, and go to "Make a custom Int
 Choose Slash Commands
 
 Click on "Add Configuration" button
+
+
 ![Add Configuration](http://i.imgur.com/mwPIcge.png)
 
 Let the slash command be ```/go``` (or command of your choice)
