@@ -221,7 +221,6 @@ function getImgUrl(access) {
             var img_url = temp_url.split("?")[0];
             console.log(img_url);
             ig_picture_tags = clarifai.run(img_url);
-            console.log(result);
         });
 };
 
@@ -229,6 +228,7 @@ function getImgUrl(access) {
 // if so, the user get a point
 function check_outdoor(result, name, user) {
     result = result.split(", ");
+    console.log(result);
     for (var tag in result) {
         if (tag == "outside" || tag == "street") {
             slack.send({
