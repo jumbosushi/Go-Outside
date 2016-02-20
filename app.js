@@ -99,8 +99,10 @@ app.post('/slash', function (req, res) {
         slack.send({
             text: "Hey there! This is yo boy Joey \n" +
                 "I will keep in track of how your team is doing in the Go Outside game :rocket: \n" +
-                "Here's how its played. Whenever you post a picture on Instagram, I'll check if you took \n" +
-                "that picture outside. If you did, congrats! You get a point \n"
+                "Here's how its played. Whenever you post a picture on Instagram, " +
+                "I'll check if you took \n"  +
+                "that picture outside. If you did, congrats! You get a point.\n"
+                "Type '/go login' to get started!"
         });
 
     // "talk" - Choose a random phrase from shit_joey_say
@@ -147,7 +149,8 @@ exports.handleauth = function (req, res) {
             console.log('Yay! Access token is ' + result.access_token);
             access_token = result.access_token;
             slack.send({
-                text: "Log in Successful!\n Welcome to Go Outside homie!"
+                text: "Log in Successful!\n Welcome to Go Outside homie!" +
+                      "\n Wait a moment till your Instagram is subscribed to the game"
             });
         }
     });
@@ -182,7 +185,9 @@ app.get('/handleauth', exports.handleauth);
 app.get('/user', function (req, res) {
     slack.send({
         text: "You're part of the club! \n Remember, " +
-              "the first rule of Go Outside Club is to always talk about Go Outside Club"
+              "the first rule of Go Outside Club is to always talk about Go Outside Club" +
+              "I will let yall know if anyone put up an outdoor picture." +
+              "Hope to see your's first!"
     });
     // Instagram API completes subscription when 'hub.challenge' is send back
     res.send(req.query['hub.challenge']);
