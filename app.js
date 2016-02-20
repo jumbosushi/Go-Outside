@@ -1,7 +1,8 @@
 // Express dependencies
 var http = require('http');
 var clarifai = require('./clarifai');
-var insta = require('./instagram.js');
+var insta = require('./instagram');
+var sm = require('./slack_message')
 var express = require('express');
 var bodyParser = require('body-parser');
 var $ = require('jQuery');
@@ -54,73 +55,12 @@ var shit_joey_say = {
     29: "I'm a professional zombie hunter \n Have you seen zombie recently? Yeah, you're welcome"
 }
 
-// for Instagram API
-var redirect_uri = "https://lit-journey-12058.herokuapp.com/handleauth"; //TODO
-// http://localhost:3000/
-// https://lit-journey-12058.herokuapp.com/handleauth
-
 // body parser middleware
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// -----------------------------
 // Slash commands
-app.post('/slash', function (req, res) {
-
-    var slash_text = req.body.text;
-    // "login" - let the user log in
-    if (slash_text == "login") {
-        user_name = req.body.user_name; // store the username temporally
-        user_id = req.body.user_id; // store the user_id temporally
-        slack.send({
-            text: "<https://lit-journey-12058.herokuapp.com/authorize_user|Join the party!>" +
-                  "\n You'll need your insagram account."
-        });
-
-
-    // "stats" - show the current standing of people in the game
-    } else if (slash_text == "stats") {
-        for (id in users) {
-            slack.send({
-                text: users[id]["name"] + " has " + users[id]["score"] + " points!"
-            });
-        };
-
-
-    // "coconut oil" - coconut oil
-    } else if (slash_text == "coconut oil") {
-        slack.send({
-            text: "Now you're speaking my language :taco: :taco: :taco:"
-        });
-
-    // "help" - explain the game
-    } else if (slash_text == "help") {
-        slack.send({
-            text: "Hey there! This is yo boy Joey \n" +
-                "I will keep in track of how your team is doing in the Go Outside game :rocket: \n" +
-                "Here's how its played. Whenever you post a picture on Instagram, " +
-                "I'll check if you took \n"  +
-                "that picture outside. If you did, congrats! You get a point.\n" +
-                "Type '/go login' to get started!"
-        });
-
-    // "talk" - Choose a random phrase from shit_joey_say
-    } else if (slash_text == "talk") {
-        slack.send({
-            text: shit_joey_say[parseInt(Math.random() * 30)]
-        });
-
-    // everything else
-    } else {
-        slack.send({
-            text: "Hmm not sure what tag that is. You mean Bacon?"
-        });
-    }
-    res.end();
-});
-
+app.post('/slash',
 
 // -------------------------------------------
 

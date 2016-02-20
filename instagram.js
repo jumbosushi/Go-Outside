@@ -2,6 +2,9 @@
 var $ = require('jQuery');
 var ig = require('instagram-node').instagram({});
 
+// for Instagram API
+var redirect_uri = "https://lit-journey-12058.herokuapp.com/handleauth";
+
 // All Instagram Modules should be moved her
 module.exports = {
 
