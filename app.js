@@ -108,7 +108,12 @@ var shit_joey_say = {
                     "Here's how its played. Whenever you post a picture on Instagram, " +
                     "I'll check if you took \n"  +
                     "that picture outside. If you did, congrats! You get a point.\n" +
-                    "Type '/go login' to get started!"
+                    "Type '/go login' to get started!" +
+                    "\n /go help - post message containing the user guide" +
+                    " /go login - post link to Instagram login" +
+                    " /go stats - showts the current points standing" +
+                    " /go talk - bot post a random message" +
+                    " /go coconut oil - secret command"
              });
              break;
 
