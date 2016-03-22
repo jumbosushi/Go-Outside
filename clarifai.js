@@ -24,6 +24,7 @@ module.exports = function (imgurl) {
     .then(function(r) {
       localStorage.setItem('accessToken', r.access_token);
       localStorage.setItem('tokenTimestamp', Math.floor(Date.now() / 1000));
+      console.log(("ajax in getCredentials ran!"));
       cb();
     });
   }
@@ -37,12 +38,12 @@ module.exports = function (imgurl) {
     console.log(accessToken);
 
     return $.ajax({
+      'type': 'POST'.
       'url': 'https://api.clarifai.com/v1/tag',
       'headers': {
         'Authorization': 'Bearer ' + accessToken
       },
-      'data': data,
-      'type': 'POST'
+      'data': data
     }).then(function(r){
       console.log(r);
       parseResponse(r);
