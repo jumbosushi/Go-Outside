@@ -39,7 +39,7 @@ Built-in Slach command tags:
 
 Deploy it first!
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](hhttps://heroku.com/deploy?template=https://github.com/jumbosushi/Go-Outside)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/jumbosushi/Go-Outside)
 
 You need to do three super easy things:
 
