@@ -236,26 +236,29 @@ app.post('/user', function (req, res) {
     res.send("New activity from the subcription detected");
 });
 
+function get_ig() {
+  return $.ajax({
+    method: "GET",
+    url: "https://api.instagram.com/v1/users/self/media/recent/" + "?" + url_param
+  });
+};
 // Parse JSON link from Instagram, and pass it to Clarifai.js
 function getImgUrl(access) {
     var url_param = $.param({
         access_token: access
     });
-    $.when(
-      $.ajax({
-        method: "GET",
-        url: "https://api.instagram.com/v1/users/self/media/recent/" + "?" + url_param
-      })
-    ).done(function( result ) {
-      var string_ver = JSON.stringify(result);
-      var ig_result = JSON.parse(string_ver);
-      var temp_url = ig_result.data[0].images.standard_resolution.url;
-      console.log(temp_url);
-      ig_picture_url = temp_url.split("?")[0];
-      console.log(ig_picture_url);
-      ig_picture_tags = clarifai.run(ig_picture_url);
-      console.log(ig_picture_tags);   // TODO - returns undefined
-    });
+    var ig_done = get_ig();
+    $.when( ig_done)
+      .done(function( result ) {
+        var string_ver = JSON.stringify(result);
+        var ig_result = JSON.parse(string_ver);
+        var temp_url = ig_result.data[0].images.standard_resolution.url;
+        console.log(temp_url);
+        ig_picture_url = temp_url.split("?")[0];
+        console.log(ig_picture_url);
+        ig_picture_tags = clarifai.run(ig_picture_url);
+        console.log(ig_picture_tags);   // TODO - returns undefined
+      });
 };
 
 // check if the picture was take outside
