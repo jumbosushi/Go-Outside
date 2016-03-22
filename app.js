@@ -206,7 +206,7 @@ function new_upload(req, res) {
             text: "Looks like " + users[sub_id]["name"] + " submitted a new picture"
         });
         console.log(users[sub_id]["access"]);
-        getImgUrl(users[sub_id]["access"]);
+        getImgUrl(users[sub_id]["access"], sub_id);
     };
     res.send("New activity from the subcription detected");
 }
@@ -218,7 +218,7 @@ function get_ig(url_param) {
   });
 };
 // Parse JSON link from Instagram, and pass it to Clarifai.js
-function getImgUrl(access) {
+function getImgUrl(access, sub_id) {
     var url_param = $.param({
         access_token: access
     });
@@ -236,6 +236,8 @@ function getImgUrl(access) {
         check_outdoor(ig_picture_tags, users[sub_id]["name"], users[sub_id]);
       });
 };
+
+
 
 // check if the picture was take outside
 // if so, the user get a point
