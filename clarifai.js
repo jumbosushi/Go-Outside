@@ -10,7 +10,7 @@ module.exports = function (imgurl) {
   		return;
   	}
 
-  	$ = require("jquery")(window);
+  	$ = require("jQuery")(window);
   });
 
   var LocalStorage = require('node-localstorage').LocalStorage,
