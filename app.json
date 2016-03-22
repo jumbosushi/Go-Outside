@@ -1,0 +1,7 @@
+{
+  "name": "Go-Outside",
+  "description": "A slackbot that makes sure your teammates go outside",
+  "repository": "https://github.com/jumbosushi/Go-Outside",
+  "logo": "http://i.imgur.com/yoVfj5a.png",
+  "keywords": ["node", "express", "slack"]
+}
