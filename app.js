@@ -12,25 +12,51 @@ var slack = new Slack("https://hooks.slack.com/services/T0N3CEYE5/B0N49BWJ1/XUsV
 var app = express();
 var port = process.env.PORT || 3000;
 
+// body parser middleware
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+// -------------------------------------
+// Routing
+// test route
+app.get('/', function (req, res) {
+    res.status(200).send('Hello World!')
+});
+
+// error handler
+app.use(function (err, req, res, next) {
+    console.error(err.stack);
+    res.status(400).send(err.message);
+});
+
+app.listen(port, function () {
+    console.log('Slack bot listening on port ' + port);
+})
+
+// for Instagram API:
+// api initially send users to authorize
+app.get('/authorize_user', exports.authorize_user);
+// redirecting URI is handled here
+app.get('/handleauth', exports.handleauth);
+
+// --------------------------------
+// API Variables;
+
 var access_token; // hold the access Token of a user
 var users = {}; // key = user's subscription id,  val = access_token
 var user_name;
 var user_id;
 
-// body parser middleware
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
 // for Instagram API
-var redirect_uri = "https://lit-journey-12058.herokuapp.com/handleauth";
+var redirect_uri = "https://YOUR_URL.herokuapp.com/handleauth";
 
 // Collect Clarifai tags
 var ig_picture_tags;
 var ig_picture_url;
 // overide instagram authentification
 ig.use({
-    client_id: "bd09eab6bd9b4c9daf691a550faf04a9",
-    client_secret: "95b76f3db7314eaea2bfefd9569a33ec"
+    client_id: "YOUR_ID",
+    client_secret: "YOUR_SECRET"
 });
 
 
@@ -70,6 +96,9 @@ var shit_joey_say = {
 };
 
 
+// -------------------------------------
+// Slack API npm
+
 // slash commands
  function slash_cmd(req, res) {
     switch (req.body.text) {
@@ -78,7 +107,7 @@ var shit_joey_say = {
             user_name = req.body.user_name; // store the username temporally
             user_id = req.body.user_id; // store the user_id temporally
             slack.send({
-                text: "<https://lit-journey-12058.herokuapp.com/authorize_user|Join the party!>" +
+                text: "<https://YOUR_URL.herokuapp.com/authorize_user|Join the party!>" +
                   "\n You'll need your insagram account."
             });
             break;
@@ -137,8 +166,8 @@ var shit_joey_say = {
 app.post('/slash', slash_cmd);
 
 // -------------------------------------------
-
 // Instagram Authentification
+
 // authorize the user by redirecting user to sign in page
 exports.authorize_user=  function (req, res) {
                         res.redirect(ig.get_authorization_url(redirect_uri))
@@ -164,7 +193,7 @@ exports.handleauth = function (req, res) {
                      });
                         // Instagram subscription
                         // initializes the user profile
-                        ig.add_user_subscription('https://lit-journey-12058.herokuapp.com/user',
+                        ig.add_user_subscription('https://YOUR_URL.herokuapp.com/user',
                             function (err, result, remaining, limit) {
                                 users[result.id] = {
                                     "access": access_token,
@@ -175,13 +204,6 @@ exports.handleauth = function (req, res) {
                         });
                         res.end('Joey is proud of ya');
                     };
-
-
-
-// api initially send users to authorize
-app.get('/authorize_user', exports.authorize_user);
-// redirecting URI is handled here
-app.get('/handleauth', exports.handleauth);
 
 
 // ---------------------------------
@@ -214,7 +236,7 @@ app.post('/user', function (req, res) {
     res.send("New activity from the subcription detected");
 });
 
-// Parse JSON link from IG, and pass it to Clarifai.js
+// Parse JSON link from Instagram, and pass it to Clarifai.js
 function getImgUrl(access) {
     var url_param = $.param({
         access_token: access
@@ -247,25 +269,10 @@ function check_outdoor(result, name, user) {
             slack.send({
                 text: name + " did it! Way to go for being outside! (wait wut?)" + "You get 1 points."
             });
+
+            // User earns a score!
             user["score"] += 1;
             return;
         }
     };
 };
-
-// -------------------------------------
-
-// test route
-app.get('/', function (req, res) {
-    res.status(200).send('Hello World!')
-});
-
-// error handler
-app.use(function (err, req, res, next) {
-    console.error(err.stack);
-    res.status(400).send(err.message);
-});
-
-app.listen(port, function () {
-    console.log('Slack bot listening on port ' + port);
-})
