@@ -62,6 +62,7 @@ module.exports = function (imgurl) {
 
     $('#tags').text(tags.toString().replace(/,/g, ', '));
     console.log("clarifai.js tags is about to be returned!");
+    console.log(tags);
     return tags;
   }
 
@@ -69,7 +70,7 @@ module.exports = function (imgurl) {
       || localStorage.getItem('accessToken') === null) {
     getCredentials(function() {
       console.log("getCredentials callback is being called!");
-      postImage(imgurl);
+      postImage(imgurl); // IMPLTMENT HIS !
     });
   } else {
     postImage(imgurl);
