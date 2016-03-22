@@ -249,7 +249,7 @@ function getImgUrl(access) {
             console.log(temp_url);
             ig_picture_url = temp_url.split("?")[0];
             console.log(ig_picture_url);
-            ig_picture_tags = clarifai.run(img_url);
+            ig_picture_tags = clarifai.run(ig_picture_url);
             console.log(ig_picture_tags);   // TODO - returns undefined
         });
 };
