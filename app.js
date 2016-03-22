@@ -7,7 +7,7 @@ var $ = require('jQuery');
 var ig = require('instagram-node').instagram({});
 var Slack = require('node-slack');
 var xml = require('xmlhttprequest');
-var slack = new Slack("YOUR_INCOMING_WEBHOOK_URL");
+var slack = new Slack("https://hooks.slack.com/services/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");
 
 var app = express();
 var port = process.env.PORT || 3000;
@@ -49,15 +49,15 @@ var user_name;
 var user_id;
 
 // for Instagram API
-var redirect_uri = "https://YOUR_URL.herokuapp.com/handleauth";
+var redirect_uri = "https://lit-journey-12058.herokuapp.com/handleauth";
 
 // Collect Clarifai tags
 var ig_picture_tags;
 var ig_picture_url;
 // overide instagram authentification
 ig.use({
-    client_id: "YOUR_ID",
-    client_secret: "YOUR_SECRET"
+    client_id: "a74872e1b7d94f6e9747ab5fcdfd5de3",
+    client_secret: "fb5112d172bf46d988f187cf91ba1fb0"
 });
 
 
@@ -108,7 +108,7 @@ var shit_joey_say = {
             user_name = req.body.user_name; // store the username temporally
             user_id = req.body.user_id; // store the user_id temporally
             slack.send({
-                text: "<https://YOUR_URL.herokuapp.com/authorize_user|Join the party!>" +
+                text: "<https://lit-journey-12058.herokuapp.com/authorize_user|Join the party!>" +
                   "\n You'll need your insagram account."
             });
             break;
@@ -194,7 +194,7 @@ exports.handleauth = function (req, res) {
                      });
                         // Instagram subscription
                         // initializes the user profile
-                        ig.add_user_subscription('https://YOUR_URL.herokuapp.com/user',
+                        ig.add_user_subscription('https://lit-journey-12058.herokuapp.com/user',
                             function (err, result, remaining, limit) {
                                 users[result.id] = {
                                     "access": access_token,
