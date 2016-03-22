@@ -38,7 +38,7 @@ module.exports = function (imgurl) {
     console.log(accessToken);
 
     return $.ajax({
-      'type': 'POST'.
+      'type': 'POST',
       'url': 'https://api.clarifai.com/v1/tag',
       'headers': {
         'Authorization': 'Bearer ' + accessToken
