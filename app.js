@@ -1,6 +1,6 @@
 // Express dependencies
 var http = require('http');
-var clarifai = require('./clarifai.js');
+var clarifai = require('./clarifai');
 var express = require('express');
 var bodyParser = require('body-parser');
 var $ = require('jQuery');
