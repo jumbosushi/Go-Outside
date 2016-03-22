@@ -48,11 +48,13 @@ function parseResponse(resp) {
   if (resp.status_code === 'OK') {
     var results = resp.results;
     tags = results[0].result.tag.classes;
+    console.log("clarifai.js working ok!");
   } else {
     console.log('Sorry, something is wrong.');
   }
 
   $('#tags').text(tags.toString().replace(/,/g, ', '));
+  console.log("clarifai.js tags is about to be returned!");
   return tags;
 }
 
@@ -63,9 +65,9 @@ module.exports = function (imgurl) {
                     if (localStorage.getItem('tokenTimeStamp') - Math.floor(Date.now() / 1000) > 86400
                       || localStorage.getItem('accessToken') === null) {
                       getCredentials(function() {
-                        postImage(imgurl);
+                        return postImage(imgurl);
                       });
                     } else {
-                      postImage(imgurl);
+                      return postImage(imgurl);
                     }
                   }
