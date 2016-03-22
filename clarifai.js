@@ -1,5 +1,8 @@
 // Cloned from https://github.com/cassidoo/clarifai-javascript-starter
 var $ = require('jQuery');
+
+var Use_Clarifai = function () {};
+
 var LocalStorage = require('node-localstorage').LocalStorage,
 localStorage = new LocalStorage('./scratch');
 
@@ -55,6 +58,8 @@ function parseResponse(resp) {
 
 
 module.exports = function (imgurl) {
+                    console.log("INSIDE clarifai.js!");
+                    console.log(imgurl);
                     if (localStorage.getItem('tokenTimeStamp') - Math.floor(Date.now() / 1000) > 86400
                       || localStorage.getItem('accessToken') === null) {
                       getCredentials(function() {
