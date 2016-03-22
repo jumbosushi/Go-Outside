@@ -38,6 +38,8 @@ Built-in Slach command tags:
 # Installation
 
 Deploy it first!
+
+
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](hhttps://heroku.com/deploy?template=https://github.com/jumbosushi/Go-Outside)
 
 You need to do three super easy things:
