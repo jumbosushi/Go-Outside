@@ -7,7 +7,7 @@ var $ = require('jQuery');
 var ig = require('instagram-node').instagram({});
 var Slack = require('node-slack');
 var xml = require('xmlhttprequest');
-var slack = new Slack("https://hooks.slack.com/services/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");
+var slack = new Slack("YOUR_INCOMING_WEBHOOK_URL");
 
 var app = express();
 var port = process.env.PORT || 3000;
@@ -18,17 +18,18 @@ app.use(bodyParser.json());
 
 // -------------------------------------
 // Routing
-// test route
+// Test route
 app.get('/', function (req, res) {
-    res.status(200).send('Hello World!')
+    res.status(200).send('Go-Outside is live!')
 });
 
-// error handler
+// Error handler
 app.use(function (err, req, res, next) {
     console.error(err.stack);
     res.status(400).send(err.message);
 });
 
+// For testing locally
 app.listen(port, function () {
     console.log('Slack bot listening on port ' + port);
 })
