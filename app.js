@@ -236,11 +236,7 @@ app.post('/user', function (req, res) {
     res.send("New activity from the subcription detected");
 });
 
-function get_ig() {
-  var url_param = $.param({
-      access_token: access
-  });
-  
+function get_ig(url_param) {
   return $.ajax({
     method: "GET",
     url: "https://api.instagram.com/v1/users/self/media/recent/" + "?" + url_param
@@ -248,7 +244,10 @@ function get_ig() {
 };
 // Parse JSON link from Instagram, and pass it to Clarifai.js
 function getImgUrl(access) {
-    var ig_done = get_ig();
+    var url_param = $.param({
+        access_token: access
+    });
+    var ig_done = get_ig(url_param);
     $.when( ig_done)
       .done(function( result ) {
         var string_ver = JSON.stringify(result);
