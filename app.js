@@ -237,6 +237,10 @@ app.post('/user', function (req, res) {
 });
 
 function get_ig() {
+  var url_param = $.param({
+      access_token: access
+  });
+  
   return $.ajax({
     method: "GET",
     url: "https://api.instagram.com/v1/users/self/media/recent/" + "?" + url_param
@@ -244,9 +248,6 @@ function get_ig() {
 };
 // Parse JSON link from Instagram, and pass it to Clarifai.js
 function getImgUrl(access) {
-    var url_param = $.param({
-        access_token: access
-    });
     var ig_done = get_ig();
     $.when( ig_done)
       .done(function( result ) {
