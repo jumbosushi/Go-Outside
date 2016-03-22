@@ -34,12 +34,6 @@ app.listen(port, function () {
     console.log('Slack bot listening on port ' + port);
 })
 
-// for Instagram API:
-// api initially send users to authorize
-app.get('/authorize_user', exports.authorize_user);
-// redirecting URI is handled here
-app.get('/handleauth', exports.handleauth);
-
 // --------------------------------
 // API Variables;
 
@@ -206,6 +200,11 @@ exports.handleauth = function (req, res) {
                         res.end('Joey is proud of ya');
                     };
 
+// for Instagram API:
+// api initially send users to authorize
+app.get('/authorize_user', exports.authorize_user);
+// redirecting URI is handled here
+app.get('/handleauth', exports.handleauth);
 
 // ---------------------------------
 // Instagram subscrription API
