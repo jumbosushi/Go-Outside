@@ -242,7 +242,10 @@ function getImgUrl(access) {
         access_token: access
     });
     $.when(
-      $.get('https://api.instagram.com/v1/users/self/media/recent/' + '?' + url_param)
+      $.ajax({
+        method: "GET",
+        url: "https://api.instagram.com/v1/users/self/media/recent/" + "?" + url_param
+      })
     ).done(function( result ) {
       var string_ver = JSON.stringify(result);
       var ig_result = JSON.parse(string_ver);
