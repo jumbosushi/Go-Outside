@@ -249,7 +249,7 @@ function getImgUrl(access) {
     });
     var ig_done = get_ig(url_param);
     $.when( ig_done)
-      .done(function( result ) {
+     .then(function( result ) {
         var string_ver = JSON.stringify(result);
         var ig_result = JSON.parse(string_ver);
         var temp_url = ig_result.data[0].images.standard_resolution.url;
