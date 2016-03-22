@@ -11,9 +11,9 @@ module.exports = function (imgurl) {
   function getCredentials(cb) {
     console.log("getCredentials() is running!");
     var data = {
-      'grant_type': 'client_credentials',
-      'client_id': "LPOXuuwXLHA2yZ7fBrN_DAHTsu26s2mR9h4DVmMa",
-      'client_secret': "VMEOyjHqQqIRRdpNL-o8wmfEpnsObF9ksIaPJ2Yt"
+      grant_type: 'client_credentials',
+      client_id: "LPOXuuwXLHA2yZ7fBrN_DAHTsu26s2mR9h4DVmMa",
+      client_secret: "VMEOyjHqQqIRRdpNL-o8wmfEpnsObF9ksIaPJ2Yt"
     };
 
     return $.ajax({
@@ -32,7 +32,7 @@ module.exports = function (imgurl) {
   function postImage(imgurl) {
     console.log("postImage is running!!");
     var data = {
-      'url': imgurl
+      url: imgurl
     };
     var accessToken = localStorage.getItem('accessToken');
     console.log(accessToken);
