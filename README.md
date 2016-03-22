@@ -48,7 +48,7 @@ You need to do three super easy things:
 2. Configure Incoming Webhook integration on slack
 3. Add API token to app.js
 
-## Adding Slack Command
+## #1. Adding Slack Command
 
 Start by going to your team's App integration page
 
@@ -81,7 +81,7 @@ Now you have a (almost) working slash command!
 ![Joey_setting](http://i.imgur.com/um0CtBc.png)
 
 
-## Configure Incoming Webhook
+## #2. Configure Incoming Webhook
 
 From earlier custom Integration page, choose "Incoming Webhook"
 
@@ -98,7 +98,7 @@ Once your at the setting page:
 
 Save the setting!
 
-## Add API tokens
+## #3. Add API tokens
 As well as adding [Clarifai](https://developer.clarifai.com/) & [Instagram](https://www.instagram.com/developer/) API tokens, make sure to configure following variables to your own in app.js!
 
 (If you haven't already, be sure make an account for each service! Promise it'll be worth it)
