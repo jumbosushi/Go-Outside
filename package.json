@@ -1,6 +1,10 @@
 {
   "name": "go-outside",
   "version": "1.0.0",
+  "engines": {
+   "node": "4.2.4",
+   "npm": "4.14.x"
+  },
   "description": "Slack bot to make your employees go outside",
   "main": "index.js",
   "scripts": {
