@@ -54,13 +54,13 @@ function parseResponse(resp) {
 }
 
 
-exports.run = function (imgurl) {
-                if (localStorage.getItem('tokenTimeStamp') - Math.floor(Date.now() / 1000) > 86400
-                  || localStorage.getItem('accessToken') === null) {
-                  getCredentials(function() {
-                    postImage(imgurl);
-                  });
-                } else {
-                  postImage(imgurl);
-                }
-              }
+module.exports = function (imgurl) {
+                    if (localStorage.getItem('tokenTimeStamp') - Math.floor(Date.now() / 1000) > 86400
+                      || localStorage.getItem('accessToken') === null) {
+                      getCredentials(function() {
+                        postImage(imgurl);
+                      });
+                    } else {
+                      postImage(imgurl);
+                    }
+                  }

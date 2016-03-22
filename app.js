@@ -1,6 +1,6 @@
 // Express dependencies
 var http = require('http');
-var clarifai = require('./clarifai');
+var clarifai = require('./clarifai.js');
 var express = require('express');
 var bodyParser = require('body-parser');
 var $ = require('jQuery');
@@ -256,7 +256,7 @@ function getImgUrl(access) {
         console.log(temp_url);
         ig_picture_url = temp_url.split("?")[0];
         console.log(ig_picture_url);
-        ig_picture_tags = clarifai.run(ig_picture_url);
+        ig_picture_tags = clarifai(ig_picture_url);
         console.log(ig_picture_tags);   // TODO - returns undefined
       });
 };
