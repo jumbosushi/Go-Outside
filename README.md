@@ -97,7 +97,10 @@ Once your at the setting page:
 Save the setting!
 
 ## Add API tokens
-As well as adding Clarifai & Instagram API tokens, make sure to configure following variables to your own in app.js!
+As well as adding [Clarifai](https://developer.clarifai.com/) & [Instagram](https://www.instagram.com/developer/) API tokens, make sure to configure following variables to your own in app.js!
+
+(If you haven't already, be sure make an account for each service! Promise it'll be worth it)
+
 - "YOUR_ID"
 - "YOUR_SECRET"
 - "YOUR_URL"
