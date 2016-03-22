@@ -9,6 +9,7 @@ module.exports = function (imgurl) {
   localStorage = new LocalStorage('./scratch');
 
   function getCredentials(cb) {
+    console.log("getCredentials() is running!");
     var data = {
       'grant_type': 'client_credentials',
       'client_id': "LPOXuuwXLHA2yZ7fBrN_DAHTsu26s2mR9h4DVmMa",
@@ -28,6 +29,7 @@ module.exports = function (imgurl) {
   }
 
   function postImage(imgurl) {
+    console.log("postImage is running!!");
     var data = {
       'url': imgurl
     };
