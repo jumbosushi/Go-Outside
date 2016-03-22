@@ -37,7 +37,7 @@ module.exports = function (imgurl) {
     var accessToken = localStorage.getItem('accessToken');
     console.log(accessToken);
 
-    return $.ajax({
+    $.ajax({
       type: 'POST',
       url: 'https://api.clarifai.com/v1/tag',
       headers: {
@@ -45,8 +45,8 @@ module.exports = function (imgurl) {
       },
       data: data
     }).then(function(r){
-      console.log(r);
-      parseResponse(r);
+      console.log("ajax in postImage ran!");
+      return parseResponse(r);
     });
   }
 
@@ -68,9 +68,10 @@ module.exports = function (imgurl) {
   if (localStorage.getItem('tokenTimeStamp') - Math.floor(Date.now() / 1000) > 86400
       || localStorage.getItem('accessToken') === null) {
     getCredentials(function() {
-      return postImage(imgurl);
+      console.log("getCredentials callback is being called!");
+      postImage(imgurl);
     });
   } else {
-    return postImage(imgurl);
+    postImage(imgurl);
   }
 }
