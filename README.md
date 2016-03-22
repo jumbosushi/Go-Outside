@@ -35,14 +35,16 @@ Built-in Slach command tags:
 *  ```/go talk``` - bot post a random message
 *  ```/go coconut oil``` - secret command
 
-Currently hosted at [Atsushi's Heroku](https://lit-journey-12058.herokuapp.com/)
-
 # Installation
 
-You need to do two super easy things:
+Deploy it first!
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](hhttps://heroku.com/deploy?template=https://github.com/jumbosushi/Go-Outside)
+
+You need to do three super easy things:
 
 1. Add  ```/go``` slash command (stands for Go Outside)
 2. Configure Incoming Webhook integration on slack
+3. Add API token to app.js
 
 ## Adding Slack Command
 
@@ -66,7 +68,7 @@ Let the slash command be ```/go``` (or command of your choice)
 
 Once you go to Integration Setting,
 
-* Change the URL to **https://lit-journey-12058.herokuapp.com/slash**
+* Change the URL to **https://YOUR_URL.herokuapp.com/slash**
 * Change method to POST
 
 ![/go_setting](http://i.imgur.com/aVqUJha.png)
@@ -92,7 +94,15 @@ Once your at the setting page:
 * Copy and paste this into [line 10 of app.js](https://github.com/jumbosushi/Go-Outside/blob/master/app.js#L10)
 ![Imgur](http://i.imgur.com/icyaGkE.png)
 
-Save the setting
+Save the setting!
+
+## Add API tokens
+As well as adding Clarifai & Instagram API tokens, make sure to configure following variables to your own in app.js!
+- "YOUR_ID"
+- "YOUR_SECRET"
+- "YOUR_URL"
+- "YOUR_INCOMING_WEBHOOK_URL"
+
 
 Aaaaand that's it! Have fun with the game :rocket: !
 
@@ -105,6 +115,5 @@ Released under the [MIT license](https://github.com/jumbosushi/Go-Outside/blob/m
 # Todo
 * Turn the app into a slack bot - makes the installation much simpler
 * Use [botkit](https://github.com/howdyai/botkit)
-* Fix Clarifai API call
-* Edit README so it will direct the user to deploy the app (ex. change the token to different apis)
-* Edit README to be like [this]https://github.com/CharlieHess/slack-poker-bot
+* Make Clarifai API call stable
+* Edit README to be like [this](https://github.com/CharlieHess/slack-poker-bot)

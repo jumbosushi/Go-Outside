@@ -1,0 +1,44 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   'app.json',
+1 verbose cli   '--global' ]
+2 info using npm@2.14.12
+3 info using node@v4.2.4
+4 verbose install initial load of C:\Users\惇\AppData\Roaming\npm\package.json
+5 verbose readDependencies loading dependencies from C:\Users\惇\AppData\Roaming\npm\package.json
+6 silly cache add args [ 'app.json', null ]
+7 verbose cache add spec app.json
+8 silly cache add parsed spec Result {
+8 silly cache add   raw: 'app.json',
+8 silly cache add   scope: null,
+8 silly cache add   name: null,
+8 silly cache add   rawSpec: 'app.json',
+8 silly cache add   spec: 'c:\\Sites\\odin\\Go-Outside\\app.json',
+8 silly cache add   type: 'local' }
+9 silly addLocalTarball shasum (computed) 4ce6077f604f4be83736a244986a8f45558357f1
+10 verbose addTmpTarball c:\Sites\odin\Go-Outside\app.json not in flight; adding
+11 verbose addTmpTarball validating metadata from c:\Sites\odin\Go-Outside\app.json
+12 verbose tar unpack c:\Sites\odin\Go-Outside\app.json
+13 verbose tar unpacking to C:\Users\惇\AppData\Local\Temp\npm-10936-d7cb2ca4\unpack-ab5b25e69dc1
+14 silly gentlyRm C:\Users\惇\AppData\Local\Temp\npm-10936-d7cb2ca4\unpack-ab5b25e69dc1 is being purged
+15 verbose gentlyRm don't care about contents; nuking C:\Users\惇\AppData\Local\Temp\npm-10936-d7cb2ca4\unpack-ab5b25e69dc1
+16 silly gunzTarPerm modes [ '777', '666' ]
+17 error not a package c:\Sites\odin\Go-Outside\app.json
+18 error addLocal Could not install c:\Sites\odin\Go-Outside\app.json
+19 verbose stack Error: ENOENT: no such file or directory, open 'C:\Users\惇\AppData\Local\Temp\npm-10936-d7cb2ca4\unpack-ab5b25e69dc1\package.json'
+19 verbose stack     at Error (native)
+20 verbose cwd c:\Sites\odin\Go-Outside
+21 error Windows_NT 10.0.10586
+22 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "app.json" "--global"
+23 error node v4.2.4
+24 error npm  v2.14.12
+25 error path C:\Users\惇\AppData\Local\Temp\npm-10936-d7cb2ca4\unpack-ab5b25e69dc1\package.json
+26 error code ENOENT
+27 error errno -4058
+28 error syscall open
+29 error enoent ENOENT: no such file or directory, open 'C:\Users\惇\AppData\Local\Temp\npm-10936-d7cb2ca4\unpack-ab5b25e69dc1\package.json'
+29 error enoent This is most likely not a problem with npm itself
+29 error enoent and is related to npm not being able to find a file.
+30 verbose exit [ -4058, true ]
