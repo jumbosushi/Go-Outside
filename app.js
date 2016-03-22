@@ -240,9 +240,9 @@ app.post('/user', function (req, res) {
 function getImgUrl(access) {
     var url_param = $.param({
         access_token: access
-    })
+    });
     $.get('https://api.instagram.com/v1/users/self/media/recent/' + '?' + url_param)
-    .done(function( result ) {
+    .done(setTimeout(function( result ) {
       var string_ver = JSON.stringify(result);
       var ig_result = JSON.parse(string_ver);
       var temp_url = ig_result.data[0].images.standard_resolution.url;
@@ -251,7 +251,7 @@ function getImgUrl(access) {
       console.log(ig_picture_url);
       ig_picture_tags = clarifai.run(ig_picture_url);
       console.log(ig_picture_tags);   // TODO - returns undefined
-    });
+    }, 3000));
 };
 
 // check if the picture was take outside
