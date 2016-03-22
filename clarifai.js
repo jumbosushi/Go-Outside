@@ -34,6 +34,7 @@ module.exports = function (imgurl) {
       'url': imgurl
     };
     var accessToken = localStorage.getItem('accessToken');
+    console.log(accessToken);
 
     return $.ajax({
       'url': 'https://api.clarifai.com/v1/tag',
@@ -43,6 +44,7 @@ module.exports = function (imgurl) {
       'data': data,
       'type': 'POST'
     }).then(function(r){
+      console.log(r);
       parseResponse(r);
     });
   }
