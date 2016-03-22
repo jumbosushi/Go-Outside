@@ -3,15 +3,7 @@ module.exports = function (imgurl) {
   console.log("INSIDE clarifai.js!");
   console.log(imgurl);
 
-  var $;
-  require("jsdom").env("", function(err, window) {
-  	if (err) {
-  		console.error(err);
-  		return;
-  	}
-
-  	$ = require("jQuery")(window);
-  });
+  var $ = require('jQuery');
 
   var LocalStorage = require('node-localstorage').LocalStorage,
   localStorage = new LocalStorage('./scratch');
@@ -25,9 +17,9 @@ module.exports = function (imgurl) {
     };
 
     return $.ajax({
-      'url': 'https://api.clarifai.com/v1/token',
-      'data': data,
-      'type': 'POST'
+      type: 'POST',
+      url: 'https://api.clarifai.com/v1/token',
+      data: data
     })
     .then(function(r) {
       localStorage.setItem('accessToken', r.access_token);
@@ -46,12 +38,12 @@ module.exports = function (imgurl) {
     console.log(accessToken);
 
     return $.ajax({
-      'type': 'POST',
-      'url': 'https://api.clarifai.com/v1/tag',
-      'headers': {
-        'Authorization': 'Bearer ' + accessToken
+      type: 'POST',
+      url: 'https://api.clarifai.com/v1/tag',
+      headers: {
+        Authorization: 'Bearer ' + accessToken
       },
-      'data': data
+      data: data
     }).then(function(r){
       console.log(r);
       parseResponse(r);
