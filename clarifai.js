@@ -61,10 +61,10 @@ module.exports = function (imgurl) {
   }
 
   if (localStorage.getItem('tokenTimeStamp') - Math.floor(Date.now() / 1000) > 86400
-  || localStorage.getItem('accessToken') === null) {
-  getCredentials(function() {
-    return postImage(imgurl);
-  });
+      || localStorage.getItem('accessToken') === null) {
+    getCredentials(function() {
+      return postImage(imgurl);
+    });
   } else {
     return postImage(imgurl);
   }

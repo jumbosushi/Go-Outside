@@ -1,6 +1,10 @@
 // Express dependencies
 var http = require('http');
-var clarifai = require('./clarifai.js');
+var Clarifai_npm = require('clarifai')
+var clarifai = new Clarifai_npm({
+  id: "LPOXuuwXLHA2yZ7fBrN_DAHTsu26s2mR9h4DVmMa",
+  secret: "VMEOyjHqQqIRRdpNL-o8wmfEpnsObF9ksIaPJ2Yt"
+})
 var express = require('express');
 var bodyParser = require('body-parser');
 var $ = require('jQuery');
@@ -256,7 +260,12 @@ function getImgUrl(access) {
         console.log(temp_url);
         ig_picture_url = temp_url.split("?")[0];
         console.log(ig_picture_url);
-        ig_picture_tags = clarifai(ig_picture_url);
+        ig_picture_tags =
+          clarifai.tagFromUrls('image',
+                                ig_picture_url,
+                                function(err, results) {
+                                  return results.tags;
+                                });
         console.log(ig_picture_tags);   // TODO - returns undefined
       });
 };
