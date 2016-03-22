@@ -1,8 +1,5 @@
 // Cloned from https://github.com/cassidoo/clarifai-javascript-starter
 module.exports = function (imgurl) {
-  console.log("INSIDE clarifai.js!");
-  console.log(imgurl);
-
   var $ = require('jQuery');
 
   var LocalStorage = require('node-localstorage').LocalStorage,
@@ -30,7 +27,6 @@ module.exports = function (imgurl) {
   }
 
   function postImage(imgurl) {
-    console.log("postImage is running!!");
     var data = {
       url: imgurl
     };
@@ -55,7 +51,7 @@ module.exports = function (imgurl) {
     if (resp.status_code === 'OK') {
       var results = resp.results;
       tags = results[0].result.tag.classes;
-      console.log("clarifai.js working ok!");
+      console.log("clarifai.js is parsing tags!");
     } else {
       console.log('Sorry, something is wrong.');
     }
@@ -70,9 +66,9 @@ module.exports = function (imgurl) {
       || localStorage.getItem('accessToken') === null) {
     getCredentials(function() {
       console.log("getCredentials callback is being called!");
-      postImage(imgurl); // IMPLTMENT HIS !
+      return postImage(imgurl); // IMPLTMENT HIS !
     });
   } else {
-    postImage(imgurl);
+    return postImage(imgurl);
   }
 }

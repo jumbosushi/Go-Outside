@@ -16,24 +16,6 @@ var port = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// -------------------------------------
-// Routing
-// Test route
-app.get('/', function (req, res) {
-    res.status(200).send('Go-Outside is live!')
-});
-
-// Error handler
-app.use(function (err, req, res, next) {
-    console.error(err.stack);
-    res.status(400).send(err.message);
-});
-
-// For testing locally
-app.listen(port, function () {
-    console.log('Slack bot listening on port ' + port);
-})
-
 // --------------------------------
 // API Variables;
 
@@ -157,60 +139,54 @@ var shit_joey_say = {
     res.end();
 };
 
-// Slash commands
-app.post('/slash', slash_cmd);
+
 
 // -------------------------------------------
 // Instagram Authentification
 
 // authorize the user by redirecting user to sign in page
-exports.authorize_user=  function (req, res) {
-                        res.redirect(ig.get_authorization_url(redirect_uri))
-                        };
+function authorize_user(req, res) {
+  res.redirect(ig.get_authorization_url(redirect_uri))
+};
 
  // send message on #general that the user is signed in
-exports.handleauth = function (req, res) {
-                    ig.authorize_user(req.query.code, redirect_uri, function (err, result) {
-                        if (err) {
-                            console.log(err.body);
-                            res.send("Didn't work");
-                            slack.send({
-                                text: "Login Unseccessful :("
-                            });
-                        } else {
-                            console.log('Yay! Access token is ' + result.access_token);
-                            access_token = result.access_token;
-                            slack.send({
-                                text: "Log in Successful!\n Welcome to Go Outside homie!" +
-                                      "\n Wait a moment till your Instagram is subscribed to the game"
-                            });
-                        };
-                     });
-                        // Instagram subscription
-                        // initializes the user profile
-                        ig.add_user_subscription('https://lit-journey-12058.herokuapp.com/user',
-                            function (err, result, remaining, limit) {
-                                users[result.id] = {
-                                    "access": access_token,
-                                    "name": user_name,
-                                    "score": 0
-                                };
-                                console.log(users);
-                        });
-                        res.end('Joey is proud of ya');
-                    };
+function handleauth(req, res) {
+  ig.authorize_user(req.query.code, redirect_uri, function (err, result) {
+      if (err) {
+          console.log(err.body);
+          res.send("Didn't work");
+          slack.send({
+              text: "Login Unseccessful :("
+          });
+      } else {
+          console.log('Yay! Access token is ' + result.access_token);
+          access_token = result.access_token;
+          slack.send({
+              text: "Log in Successful!\n Welcome to Go Outside homie!" +
+                    "\n Wait a moment till your Instagram is subscribed to the game"
+          });
+      };
+   });
+      // Instagram subscription
+      // initializes the user profile
+      ig.add_user_subscription('https://lit-journey-12058.herokuapp.com/user',
+          function (err, result, remaining, limit) {
+              users[result.id] = {
+                  "access": access_token,
+                  "name": user_name,
+                  "score": 0
+              };
+              console.log(users);
+      });
+      res.end('Joey is proud of ya');
+};
 
-// for Instagram API:
-// api initially send users to authorize
-app.get('/authorize_user', exports.authorize_user);
-// redirecting URI is handled here
-app.get('/handleauth', exports.handleauth);
 
 // ---------------------------------
 // Instagram subscrription API
 
 // Subscribe the user when the user loggs in
-app.get('/user', function (req, res) {
+function ig_subscribe(req, res) {
     slack.send({
         text: "You're part of the club! \n Remember, " +
               "the first rule of Go Outside Club is to always talk about Go Outside Club" +
@@ -219,11 +195,11 @@ app.get('/user', function (req, res) {
     });
     // Instagram API completes subscription when 'hub.challenge' is send back
     res.send(req.query['hub.challenge']);
-});
+}
 
 // Fired when any of the registered user uploads a new file.
 // Check if the file uploaded counts as a point.
-app.post('/user', function (req, res) {
+function new_upload(req, res) {
     var sub_id = req.body[0]['subscription_id'];
     if (users[sub_id]) {
         slack.send({
@@ -234,7 +210,7 @@ app.post('/user', function (req, res) {
         check_outdoor(ig_picture_tags, users[sub_id]["name"], users[sub_id]);
     };
     res.send("New activity from the subcription detected");
-});
+}
 
 function get_ig(url_param) {
   return $.ajax({
@@ -283,3 +259,38 @@ function check_outdoor(result, name, user) {
         }
     };
 };
+
+
+// -------------------------------------
+// Routing
+// Slash commands
+app.post('/slash', slash_cmd);
+
+
+// for Instagram API:
+// api initially send users to authorize
+app.get('/authorize_user', authorize_user());
+// redirecting URI is handled here
+app.get('/handleauth', handleauth());
+
+// Subscribe the user to Instagram
+app.get('/user', ig_subscribe() );
+// Checks once the new file is uploaded
+// Checks if the picture was taken outside
+app.post('/user', new_upload());
+
+// Test route
+app.get('/', function (req, res) {
+    res.status(200).send('Go-Outside is live!')
+});
+
+// Error handler
+app.use(function (err, req, res, next) {
+    console.error(err.stack);
+    res.status(400).send(err.message);
+});
+
+// For testing locally
+app.listen(port, function () {
+    console.log('Slack bot listening on port ' + port);
+})
