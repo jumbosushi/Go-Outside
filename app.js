@@ -207,7 +207,6 @@ function new_upload(req, res) {
         });
         console.log(users[sub_id]["access"]);
         getImgUrl(users[sub_id]["access"]);
-        check_outdoor(ig_picture_tags, users[sub_id]["name"], users[sub_id]);
     };
     res.send("New activity from the subcription detected");
 }
@@ -234,6 +233,7 @@ function getImgUrl(access) {
         console.log(ig_picture_url);
         ig_picture_tags = clarifai(ig_picture_url);
         console.log(ig_picture_tags);   // TODO - returns undefined
+        check_outdoor(ig_picture_tags, users[sub_id]["name"], users[sub_id]);
       });
 };
 
