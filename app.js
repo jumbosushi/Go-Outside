@@ -269,15 +269,15 @@ app.post('/slash', slash_cmd);
 
 // for Instagram API:
 // api initially send users to authorize
-app.get('/authorize_user', authorize_user());
+app.get('/authorize_user', authorize_user(req, res));
 // redirecting URI is handled here
-app.get('/handleauth', handleauth());
+app.get('/handleauth', handleauth(req, res));
 
 // Subscribe the user to Instagram
-app.get('/user', ig_subscribe() );
+app.get('/user', ig_subscribe(req, res) );
 // Checks once the new file is uploaded
 // Checks if the picture was taken outside
-app.post('/user', new_upload());
+app.post('/user', new_upload(req, res));
 
 // Test route
 app.get('/', function (req, res) {
