@@ -3,7 +3,15 @@ module.exports = function (imgurl) {
   console.log("INSIDE clarifai.js!");
   console.log(imgurl);
 
-  var $ = require('jQuery');
+  var $;
+  require("jsdom").env("", function(err, window) {
+  	if (err) {
+  		console.error(err);
+  		return;
+  	}
+
+  	$ = require("jquery")(window);
+  });
 
   var LocalStorage = require('node-localstorage').LocalStorage,
   localStorage = new LocalStorage('./scratch');
