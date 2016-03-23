@@ -23,7 +23,7 @@ module.exports = function (imgurl) {
 
     console.log("about to start ajax!");
     $.ajax({
-      type: "POST",
+      method: "POST",
       url: "https://api.clarifai.com/v1/token",
       data: data,
       timeout: 5000,
@@ -51,7 +51,7 @@ module.exports = function (imgurl) {
     console.log(accessToken);
 
     $.ajax({ // TODO This ajax is not running. Once it runs, everything should work
-      type: "POST",
+      method: "POST",
       url: "https://api.clarifai.com/v1/tag",
       headers: {
         Authorization: "Bearer " + accessToken
