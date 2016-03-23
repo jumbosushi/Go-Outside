@@ -7,7 +7,7 @@ module.exports = function (imgurl) {
   var result_tags;
 
   $(function () {
-    Console.log( 'jQuery loaded');
+    console.log( 'jQuery loaded');
   });
 
   var LocalStorage = require('node-localstorage').LocalStorage,
