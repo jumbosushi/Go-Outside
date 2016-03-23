@@ -6,6 +6,9 @@ module.exports = function (imgurl) {
   //tags to be returned
   var result_tags;
 
+  $(function () {
+    Console.log( 'jQuery loaded');
+  });
 
   var LocalStorage = require('node-localstorage').LocalStorage,
   localStorage = new LocalStorage('./scratch');

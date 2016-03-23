@@ -219,6 +219,9 @@ function get_ig(url_param) {
 };
 // Parse JSON link from Instagram, and pass it to Clarifai.js
 function getImgUrl(access, sub_id) {
+    $(function () {
+      Console.log( 'jQuery loaded');
+    });
     var url_param = $.param({
         access_token: access
     });
