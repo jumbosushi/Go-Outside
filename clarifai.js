@@ -1,5 +1,7 @@
 // Cloned from https://github.com/cassidoo/clarifai-javascript-starter
 module.exports = function (imgurl) {
+  console.log("INSIDE clarifai.js!");
+  console.log(imgurl);
   var $ = require('jQuery');
   //tags to be returned
   var result_tags;
@@ -62,6 +64,7 @@ module.exports = function (imgurl) {
     $('#tags').text(tags.toString().replace(/,/g, ', '));
     console.log("clarifai.js tags is about to be returned!");
     console.log(tags);
+    result_tags = tags;
     return tags;
   }
 
