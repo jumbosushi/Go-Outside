@@ -24,7 +24,15 @@ module.exports = function (imgurl) {
     $.ajax({
       type: "POST",
       url: "https://api.clarifai.com/v1/token",
-      data: data
+      data: data,
+      timeout: 5000,
+      success: function(data, textStatus ){
+         console.log('request successful');
+      },
+      error: function(xhr, textStatus, errorThrown){
+         console.log(textStatus);
+         console.log(errorThrown);
+      }
     })
     .then(function(r) {
       localStorage.setItem('accessToken', r.access_token);
