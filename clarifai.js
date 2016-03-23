@@ -13,14 +13,14 @@ module.exports = function (imgurl) {
   function getCredentials(cb) {
     console.log("getCredentials() is running!");
     var data = {
-      grant_type: 'client_credentials',
+      grant_type: "client_credentials",
       client_id: "LPOXuuwXLHA2yZ7fBrN_DAHTsu26s2mR9h4DVmMa",
       client_secret: "VMEOyjHqQqIRRdpNL-o8wmfEpnsObF9ksIaPJ2Yt"
     };
 
     return $.ajax({
-      type: 'POST',
-      url: 'https://api.clarifai.com/v1/token',
+      type: "POST",
+      url: "https://api.clarifai.com/v1/token",
       data: data
     })
     .then(function(r) {
@@ -39,10 +39,10 @@ module.exports = function (imgurl) {
     console.log(accessToken);
 
     $.ajax({ // TODO This ajax is not running. Once it runs, everything should work
-      type: 'POST',
-      url: 'https://api.clarifai.com/v1/tag',
+      type: "POST",
+      url: "https://api.clarifai.com/v1/tag",
       headers: {
-        Authorization: 'Bearer ' + accessToken
+        Authorization: "Bearer " + accessToken
       },
       data: data
     }).then(function(r){
