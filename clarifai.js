@@ -21,13 +21,14 @@ module.exports = function (imgurl) {
       client_secret: "VMEOyjHqQqIRRdpNL-o8wmfEpnsObF9ksIaPJ2Yt"
     };
 
+    console.log("about to start ajax!");
     $.ajax({
       type: "POST",
       url: "https://api.clarifai.com/v1/token",
       data: data,
       timeout: 5000,
       success: function(data, textStatus ){
-         console.log('request successful');
+         console.log('Auth request successful');
       },
       error: function(xhr, textStatus, errorThrown){
          console.log(textStatus);
