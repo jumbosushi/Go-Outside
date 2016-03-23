@@ -2,10 +2,8 @@
 module.exports = function (imgurl) {
   console.log("INSIDE clarifai.js!");
   console.log(imgurl);
-  var $ = require('jQuery');
-  //tags to be returned
-  var result_tags;
 
+  var $ = require('jQuery');
 
   var LocalStorage = require('node-localstorage').LocalStorage,
   localStorage = new LocalStorage('./scratch');
@@ -13,14 +11,14 @@ module.exports = function (imgurl) {
   function getCredentials(cb) {
     console.log("getCredentials() is running!");
     var data = {
-      grant_type: "client_credentials",
+      grant_type: 'client_credentials',
       client_id: "LPOXuuwXLHA2yZ7fBrN_DAHTsu26s2mR9h4DVmMa",
       client_secret: "VMEOyjHqQqIRRdpNL-o8wmfEpnsObF9ksIaPJ2Yt"
     };
 
     return $.ajax({
-      type: "POST",
-      url: "https://api.clarifai.com/v1/token",
+      type: 'POST',
+      url: 'https://api.clarifai.com/v1/token',
       data: data
     })
     .then(function(r) {
@@ -32,22 +30,23 @@ module.exports = function (imgurl) {
   }
 
   function postImage(imgurl) {
+    console.log("postImage is running!!");
     var data = {
       url: imgurl
     };
     var accessToken = localStorage.getItem('accessToken');
     console.log(accessToken);
 
-    $.ajax({ // TODO This ajax is not running. Once it runs, everything should work
-      type: "POST",
-      url: "https://api.clarifai.com/v1/tag",
+    $.ajax({
+      type: 'POST',
+      url: 'https://api.clarifai.com/v1/tag',
       headers: {
-        Authorization: "Bearer " + accessToken
+        Authorization: 'Bearer ' + accessToken
       },
       data: data
     }).then(function(r){
       console.log("ajax in postImage ran!");
-      result_tags = parseResponse(r);
+      return parseResponse(r);
     });
   }
 
@@ -56,15 +55,13 @@ module.exports = function (imgurl) {
     if (resp.status_code === 'OK') {
       var results = resp.results;
       tags = results[0].result.tag.classes;
-      console.log("clarifai.js is parsing tags!");
+      console.log("clarifai.js working ok!");
     } else {
       console.log('Sorry, something is wrong.');
     }
 
     $('#tags').text(tags.toString().replace(/,/g, ', '));
     console.log("clarifai.js tags is about to be returned!");
-    console.log(tags);
-    result_tags = tags;
     return tags;
   }
 
@@ -72,11 +69,9 @@ module.exports = function (imgurl) {
       || localStorage.getItem('accessToken') === null) {
     getCredentials(function() {
       console.log("getCredentials callback is being called!");
-      postImage(imgurl); // IMPLTMENT HIS !
+      postImage(imgurl);
     });
   } else {
     postImage(imgurl);
   }
-  console.log("everything ran!");
-  return result_tags;
-} 
+}
