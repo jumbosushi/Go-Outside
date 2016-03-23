@@ -74,6 +74,6 @@ module.exports = function (imgurl) {
   } else {
     postImage(imgurl);
   }
-  console.log(everything ran!);
+  console.log("everything ran!");
   return result_tags;
 }
