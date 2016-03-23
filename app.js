@@ -1,4 +1,4 @@
-// Express dependencies
+ // Express dependencies
 var http = require('http');
 var clarifai = require('./clarifai.js');
 var express = require('express');
