@@ -50,7 +50,8 @@ module.exports = function (imgurl) {
     var accessToken = localStorage.getItem('accessToken');
     console.log(accessToken);
 
-    $.ajax({ // TODO This ajax is not running. Once it runs, everything should work
+    // TODO This ajax is not running. Once it runs, everything should work
+    $.ajax({
       method: "POST",
       url: "https://api.clarifai.com/v1/tag",
       headers: {
